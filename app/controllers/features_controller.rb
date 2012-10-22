@@ -3,6 +3,7 @@ class FeaturesController < ApplicationController
   # GET /features.json
   def index
     @features = Feature.all
+    @project = Project.find(params[:project_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,11 +43,11 @@ class FeaturesController < ApplicationController
   # POST /features.json
   def create
     @feature = Feature.new(params[:feature])
-    @feature.project = params[:project_id]
+    @feature.project = Project.find(params[:project_id])
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to @feature, notice: 'Feature was successfully created.' }
+        format.html { redirect_to project_feature_url(@feature), notice: 'Feature was successfully created.' }
         format.json { render json: @feature, status: :created, location: @feature }
       else
         format.html { render action: "new" }
