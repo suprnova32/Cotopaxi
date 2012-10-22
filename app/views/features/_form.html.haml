@@ -1,0 +1,41 @@
+= form_for([@project, @feature], html: {class: "form-horizontal"}) do |f|
+  - if @feature.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@feature.errors.count, "error")
+        prohibited this feature from being saved:
+      %ul
+        - @feature.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div{class: "control-group"}
+    = f.label :name, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.text_field :name
+  %div{class: "control-group"}
+    = f.label :description, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-tasks"}
+        = f.text_area :description, rows: 8
+  %div{class: "control-group"}
+    = f.label :difficulty, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-exclamation-sign"}
+        = f.select :difficulty, [['Very easy', 1], ['Easy', 2], ['Medium', 4], ['Hard', 5], ['Really Hard', 7], ['Almost Impossible', 8]]
+  %div{class: "control-group"}
+    = f.label :priority, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-exclamation-sign"}
+        = f.select :priority, [['Very Important', 1], ['Important', 2], ['Somewhat Important', 3], ['Normal', 4], ['Nice to have', 5] ]
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit class: "btn"

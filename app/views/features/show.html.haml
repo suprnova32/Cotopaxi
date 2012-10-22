@@ -1,0 +1,23 @@
+%legend
+  = @feature.name
+  for project
+  = @feature.project.name
+%br
+%h6 Description:
+%p= @feature.description
+%br
+%table{class: "table table-hover"}
+  %thead
+    %tr
+      %th Difficulty
+      %th Priority
+      %th State
+    %tr
+      %td= @feature.difficulty
+      %td= @feature.priority
+      %td= @feature.state
+
+
+
+= link_to 'Edit', edit_project_feature_path(@feature) |
+= link_to 'Back', project_features_path

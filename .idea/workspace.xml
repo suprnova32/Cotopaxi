@@ -2,46 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bd367249-eec1-4077-9b10-21aa1cfa6bf4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/glyphicons-halflings-white.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/glyphicons-halflings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/img/inkscape.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dictionaries/pato.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/features.js.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/bootstrap-responsive.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/features.css.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/features_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/helpers/features_helper.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/helpers/projects_helper.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/feature.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/models/project.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/_form.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/edit.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/index.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/new.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/show.html.erb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/layouts/_navbar.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/projects/_form.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/projects/edit.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/projects/index.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/projects/new.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/projects/show.html.haml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/initializers/formtastic.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db/schema.rb" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/templates/erb/scaffold/_form.html.erb" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/public/index.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.generators" afterPath="$PROJECT_DIR$/.idea/.generators" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Cotopaxi.iml" afterPath="$PROJECT_DIR$/.idea/Cotopaxi.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/_form.html.haml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/features/new.html.haml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/features/_form.html.erb" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/views/features/new.html.erb" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/features/edit.html.erb" afterPath="$PROJECT_DIR$/app/views/features/edit.html.haml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/app/views/features/show.html.erb" afterPath="$PROJECT_DIR$/app/views/features/show.html.haml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.css" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.haml" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/controllers/features_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/features_controller.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/feature.rb" afterPath="$PROJECT_DIR$/app/models/feature.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/project.rb" afterPath="$PROJECT_DIR$/app/models/project.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/features/index.html.haml" afterPath="$PROJECT_DIR$/app/views/features/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/index.html.haml" afterPath="$PROJECT_DIR$/app/views/projects/index.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/projects/show.html.haml" afterPath="$PROJECT_DIR$/app/views/projects/show.html.haml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb" afterPath="$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb" afterPath="$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb" />
     </list>
     <ignored path="Cotopaxi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,28 +35,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="feature.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/feature.rb">
+      <file leaf-file-name="_form.html.haml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/views/features/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="47" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="_navbar.html.haml" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/layouts/_navbar.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="20" selection-start="1113" selection-end="1113" vertical-scroll-proportion="0.8613861">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/projects/index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="41" selection-start="0" selection-end="491" vertical-scroll-proportion="-10.625">
+            <state line="22" column="31" selection-start="766" selection-end="766" vertical-scroll-proportion="0.39473686">
               <folding />
             </state>
           </provider>
@@ -90,52 +47,16 @@
       <file leaf-file-name="_form.html.haml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/projects/_form.html.haml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="8" selection-start="761" selection-end="761" vertical-scroll-proportion="-13.125">
+            <state line="0" column="53" selection-start="19" selection-end="53" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="application.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
+      <file leaf-file-name="feature.rb" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/feature.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="32" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project.rb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/project.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="45" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="new.html.erb" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/features/new.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/features/index.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="49" selection-start="524" selection-end="524" vertical-scroll-proportion="-13.125">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.html.haml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="-1.875">
+            <state line="3" column="53" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -157,22 +78,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/config/initializers/formtastic.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/projects_controller.rb" />
-        <option value="$PROJECT_DIR$/app/views/projects/new.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/projects/index.html.haml" />
-        <option value="$PROJECT_DIR$/Gemfile" />
-        <option value="$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb" />
-        <option value="$PROJECT_DIR$/app/models/project.rb" />
-        <option value="$PROJECT_DIR$/app/models/feature.rb" />
-        <option value="$PROJECT_DIR$/app/views/features/index.html.erb" />
-        <option value="$PROJECT_DIR$/app/views/features/index.html.haml" />
-        <option value="$PROJECT_DIR$/app/assets/stylesheets/application.css" />
-        <option value="$PROJECT_DIR$/app/views/projects/_form.html.haml" />
         <option value="$PROJECT_DIR$/app/views/layouts/application.html.haml" />
-        <option value="$PROJECT_DIR$/app/views/projects/show.html.haml" />
         <option value="$PROJECT_DIR$/app/views/layouts/_navbar.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/projects/index.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/projects/show.html.haml" />
+        <option value="$PROJECT_DIR$/app/controllers/features_controller.rb" />
+        <option value="$PROJECT_DIR$/app/views/features/new.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/features/_form.html.erb" />
+        <option value="$PROJECT_DIR$/app/views/features/new.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/features/edit.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/features/index.html.haml" />
+        <option value="$PROJECT_DIR$/app/views/features/show.html.haml" />
+        <option value="$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb" />
+        <option value="$PROJECT_DIR$/app/models/feature.rb" />
+        <option value="$PROJECT_DIR$/app/models/project.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb" />
+        <option value="$PROJECT_DIR$/app/views/features/_form.html.haml" />
       </list>
     </option>
   </component>
@@ -847,14 +768,18 @@
       <created>1350900957782</created>
       <updated>1350900957782</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="First implementation of models and layout design.">
+      <created>1350916765175</created>
+      <updated>1350916765175</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1280" y="24" width="1280" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32815966" sideWeight="0.49674797" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32815966" sideWeight="0.49674797" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3292683" sideWeight="0.49674797" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32815966" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -929,97 +854,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Gemfile">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="18" selection-start="615" selection-end="615" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="27" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="41" selection-start="0" selection-end="491" vertical-scroll-proportion="-10.625">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="32" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/_form.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="8" selection-start="761" selection-end="761" vertical-scroll-proportion="-13.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/project.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="45" selection-start="80" selection-end="80" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/features/new.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/features/index.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="49" selection-start="524" selection-end="524" vertical-scroll-proportion="-13.125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/features/show.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="52" selection-end="52" vertical-scroll-proportion="-1.875">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/application.html.haml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="30" selection-end="30" vertical-scroll-proportion="0.088757396">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/feature.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="47" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/bootstrap-responsive.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="4868" selection-start="5108" selection-end="5108" vertical-scroll-proportion="0.23300971">
@@ -1036,7 +870,98 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/layouts/_navbar.html.haml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="20" selection-start="1113" selection-end="1113" vertical-scroll-proportion="0.8613861">
+        <state line="29" column="20" selection-start="1113" selection-end="1113" vertical-scroll-proportion="-18.125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/features/new.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="17" selection-start="43" selection-end="43" vertical-scroll-proportion="0.037453182">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="24" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/features/show.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="25" selection-start="317" selection-end="317" vertical-scroll-proportion="0.3090909">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/features/edit.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="39" selection-start="131" selection-end="131" vertical-scroll-proportion="0.12727273">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/project.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="43" selection-start="145" selection-end="145" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121022103205_create_features.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="41" selection-start="188" selection-end="208" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20121022102957_create_projects.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="38" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/features/index.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="6" selection-start="476" selection-end="476" vertical-scroll-proportion="0.34545454">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/features_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="46" selection-start="603" selection-end="603" vertical-scroll-proportion="0.16838488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/projects/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="53" selection-start="19" selection-end="53" vertical-scroll-proportion="-0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/feature.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="53" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/features/_form.html.haml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="31" selection-start="766" selection-end="766" vertical-scroll-proportion="0.39473686">
           <folding />
         </state>
       </provider>

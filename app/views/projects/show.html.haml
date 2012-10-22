@@ -1,6 +1,14 @@
 %legend= @project.name
 %br
 %p= @project.description
+%br
+- if @project.features.any?
+    = render @project.features
+- else
+    = link_to 'Add features', new_project_feature_path(@project)
+
+%br
+
 
 
 

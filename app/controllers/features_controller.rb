@@ -25,6 +25,7 @@ class FeaturesController < ApplicationController
   # GET /features/new.json
   def new
     @feature = Feature.new
+    @project = Project.find(params[:project_id])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,6 +42,7 @@ class FeaturesController < ApplicationController
   # POST /features.json
   def create
     @feature = Feature.new(params[:feature])
+    @feature.project = params[:project_id]
 
     respond_to do |format|
       if @feature.save
