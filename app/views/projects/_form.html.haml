@@ -1,0 +1,25 @@
+= form_for(@project, html: {class: "form-horizontal"}) do |f|
+  - if @project.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(@project.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -@project.errors.full_messages.each do |msg|
+          %li= msg
+
+  %div{class: "control-group"}
+    = f.label :name, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.text_field :name
+  %div{class: "control-group"}
+    = f.label :description, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.text_area :description
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit class: "btn"
