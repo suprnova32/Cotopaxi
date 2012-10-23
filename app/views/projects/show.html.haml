@@ -5,7 +5,7 @@
     = render "features/feature"
 - else
     %span
-        = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-info', type:'button'
+        = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
 
 = link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'
 = link_to 'Back', projects_path, class: 'btn btn-success', type:'button'
