@@ -2,8 +2,9 @@ class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
   def index
-    @features = Feature.all
+    #@features = Feature.by_priority
     @project = Project.find(params[:project_id])
+    @features = @project.features.by_priority
 
     respond_to do |format|
       format.html # index.html.erb
@@ -37,6 +38,7 @@ class FeaturesController < ApplicationController
   # GET /features/1/edit
   def edit
     @feature = Feature.find(params[:id])
+    @project = Project.find(params[:project_id])
   end
 
   # POST /features
@@ -47,7 +49,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.save
-        format.html { redirect_to project_feature_url(@feature), notice: 'Feature was successfully created.' }
+        format.html { redirect_to project_url(@feature.project), flash: {success: 'Feature was successfully created.'}}
         format.json { render json: @feature, status: :created, location: @feature }
       else
         format.html { render action: "new" }
@@ -63,7 +65,7 @@ class FeaturesController < ApplicationController
 
     respond_to do |format|
       if @feature.update_attributes(params[:feature])
-        format.html { redirect_to @feature, notice: 'Feature was successfully updated.' }
+        format.html { redirect_to project_url(@feature.project), flash: {success: 'Feature was successfully updated.'}}
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -79,7 +81,7 @@ class FeaturesController < ApplicationController
     @feature.destroy
 
     respond_to do |format|
-      format.html { redirect_to features_url }
+      format.html { redirect_to project_url }
       format.json { head :no_content }
     end
   end
