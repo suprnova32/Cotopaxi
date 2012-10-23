@@ -2,6 +2,7 @@
 %html
   %head
     %title Cotopaxi | Scrum Management Tool
+    %link{rel: "icon", href:"/favicon.ico"}
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
@@ -10,7 +11,14 @@
     %br
     %br
     %br
+    = render "layouts/alert"
     %div{class: "container"}
       = yield
+
+      %br
+      %br
+      %hr
+      %footer
+        %p &copy; Cotopaxi 2012
 
 

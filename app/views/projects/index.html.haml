@@ -10,9 +10,11 @@
       %tr
         %td= project.name
         %td= project.description
-        %td= project.state
-        %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project)
-        %td= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          %span{class: "label label-#{project.set_status_label}"}
+            = project.state.capitalize
+        %td= link_to 'Show', project, class: 'btn btn-success btn-small', type:'button'
+        %td= link_to 'Edit', edit_project_path(project), class: 'btn btn-warning btn-small', type:'button'
+        %td= link_to 'Delete', project, class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
 %br
-= link_to 'New Project', new_project_path
+= link_to 'New Project', new_project_path, class: 'btn btn-info', type:'button'

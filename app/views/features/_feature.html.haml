@@ -11,15 +11,17 @@
       %th Status
       %th Priority
       %th Difficulty
-  - @project.features.each do |feature|
+  - @features.each do |feature|
     %tr
       %td= feature.name
       %td= feature.description
-      %td= feature.state
+      %td
+        %span{class: "label label-#{feature.set_status_label}"}
+          = feature.state.capitalize
       %td= feature.priority
       %td= feature.difficulty
-      %td= link_to 'Show', project_feature_path(feature)
-      %td= link_to 'Edit', edit_project_feature_path(feature)
-      %td= link_to 'Destroy', project_feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', [@project, feature], class: 'btn btn-success btn-small', type:'button'
+      %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+      %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
 %br
-= link_to 'New Feature', new_project_feature_path(@project)
+= link_to 'New Feature', new_project_feature_path(@project), class: 'btn btn-info', type:'button'

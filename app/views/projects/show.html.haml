@@ -2,14 +2,10 @@
 %p= @project.description
 %br
 - if @project.features.any?
-    = render @project.features
+    = render "features/feature"
 - else
-    = link_to 'Add features', new_project_feature_path(@project)
+    %span
+        = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-info', type:'button'
 
-%br
-
-
-
-
-= link_to 'Edit', edit_project_path(@project) |
-= link_to 'Back', projects_path
+= link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'
+= link_to 'Back', projects_path, class: 'btn btn-success', type:'button'

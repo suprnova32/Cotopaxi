@@ -1,6 +1,6 @@
 %legend
   = @feature.name
-  for project
+  for project:
   = @feature.project.name
 %br
 %h6 Description:
@@ -9,15 +9,18 @@
 %table{class: "table table-hover"}
   %thead
     %tr
-      %th Difficulty
       %th Priority
-      %th State
+      %th Difficulty
+      %th Status
     %tr
-      %td= @feature.difficulty
-      %td= @feature.priority
-      %td= @feature.state
+      %td= @feature.get_priority
+      %td= @feature.get_difficulty
+      %td
+        %span{class: "label label-#{@feature.set_status_label}"}
+          = @feature.state.capitalize
 
 
 
-= link_to 'Edit', edit_project_feature_path(@feature) |
-= link_to 'Back', project_features_path
+= link_to 'Edit', edit_project_feature_path(@feature.project, @feature), class: 'btn btn-warning', type:'button'
+= link_to 'Back', project_path(@feature.project), class: 'btn btn-success', type:'button'
+= link_to 'Delete', project_feature_path(@feature.project, @feature), class: 'btn btn-danger', type:'button', method: :delete, data: { confirm: 'Are you sure?' }

@@ -4,5 +4,4 @@
 
 = render 'form'
 
-= link_to 'Show', @feature |
-= link_to 'Back', project_features_path
+= link_to 'Back', project_path(@feature.project), class: 'btn btn-success', type:'button'
