@@ -11,7 +11,7 @@
       %th Status
       %th Difficulty
   - @features.each do |feature|
-    %tr
+    %tr{id: feature.id}
       %td= feature.name
       %td= feature.description
       %td
