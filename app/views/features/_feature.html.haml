@@ -3,13 +3,12 @@
   's current features
 %hr
 
-%table{class: "table table-hover"}
+%table{class: "table table-hover", id: "feature_table"}
   %thead
     %tr
       %th Name
       %th Description
       %th Status
-      %th Priority
       %th Difficulty
   - @features.each do |feature|
     %tr
@@ -17,11 +16,13 @@
       %td= feature.description
       %td
         %span{class: "label label-#{feature.set_status_label}"}
-          = feature.state.capitalize
-      %td= feature.priority
+          = feature.state.humanize
       %td= feature.difficulty
-      %td= link_to 'Show', [@project, feature], class: 'btn btn-success btn-small', type:'button'
+      %td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
       %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
       %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
 %br
+%div{id: "debugArea"}
+
 = link_to 'New Feature', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'

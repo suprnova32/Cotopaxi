@@ -85,4 +85,13 @@ class FeaturesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sort
+    @project = Project.find(params[:project_id])
+    @features = @project.features.by_priority
+  end
+
+  respond_to do |format|
+    format.html # index.html.erb
+  end
 end

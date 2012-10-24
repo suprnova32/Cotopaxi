@@ -28,7 +28,7 @@ end
 gem 'jquery-rails'
 gem 'devise'
 gem 'capybara'
-gem 'factory_girl'
+gem 'factory_girl_rails'
 gem 'formtastic-bootstrap'
 gem 'haml-rails'
 gem 'state_machine'

@@ -1,11 +1,34 @@
 class Feature < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :difficulty, :priority
+  attr_accessible :description, :name, :state, :difficulty, :priority, :state_event
   belongs_to :project
   validates_presence_of :project, :name, :description
   scope :by_priority, order('priority asc')
 
+  before_create :set_priority
+
+  state_machine :state, initial: :created do
+    #after_transition on:  :start, do: :feature_started
+
+    event :start do
+      transition :created => :started
+    end
+
+    event :assign do
+      transition :started => :in_progress
+    end
+
+    event :complete do
+      transition :in_progress => :done
+    end
+
+    event :done do
+
+    end
+
+  end
+
   def get_difficulty
-    dif = {1 => 'Very easy', 2 => 'Easy', 4 => 'Medium', 5 => 'Hard', 7 => 'Really Hard', 8 => 'Almost Impossible'}
+    dif = {1 => 'Very easy', 2 => 'Easy', 3 => 'Medium', 4 => 'Hard', 5 => 'Really Hard', 6 => 'Almost Impossible'}
     dif[self.difficulty] + " (#{self.difficulty})"
   end
   
@@ -15,8 +38,30 @@ class Feature < ActiveRecord::Base
   end
 
   def set_status_label
-    status = {'created' => 'info', 'started' => 'inverse', 'in progress' => 'important', 'done' => 'success'}
+    status = {'created' => 'info', 'started' => 'inverse', 'in_progress' => 'important', 'done' => 'success'}
     status[self.state]
   end
+
+  def set_priority
+    self.priority = self.project.features.by_priority.last.priority
+    self.priority += 1
+  end
+
+  def set_state_change_button
+    status = {'created' => 'Start!', 'started' => 'Assign!', 'in_progress' => 'Complete!', 'done' => 'Done!'}
+    status[self.state]
+  end
+
+  def set_state_transition
+    trans = {'created' => :start, 'started' => :assign, 'in_progress' => :complete, 'done' => :done}
+    trans[self.state]
+  end
+
+  def set_disabled_button
+    status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
+    status[self.state]
+  end
+
+
 
 end

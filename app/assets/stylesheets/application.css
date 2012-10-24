@@ -12,3 +12,11 @@
  *= require_tree
  *= require formtastic-bootstrap
  */
+
+.tDnD_whileDrag {
+    background-color: #EEE;
+}
+
+.tBTN {
+    width: 65px;
+}

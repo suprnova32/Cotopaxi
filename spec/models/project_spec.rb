@@ -2,17 +2,11 @@ require 'spec_helper'
 
 describe Project do
 
-  it 'is invalid without a name' do
-    project = Project.new
-    project.description = "Test description"
-    project.should_not be_valid
-  end
+  it {should validate_presence_of :name}
 
-  it 'is invalid without a description' do
-    project = Project.new
-    project.name = "Test Name"
-    project.should_not be_valid
-  end
+  it {should validate_presence_of :description}
+
+  it {should have_many :features}
 
   it 'raises an error if saved empty' do
     project = Project.new
@@ -28,6 +22,6 @@ describe Project do
     feature.name = 'Test Feat'
     feature.description = 'some desc'
     feature.save!
-    project.features.should include(feature)
+    project.features.should include feature
   end
 end
