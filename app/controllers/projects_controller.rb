@@ -57,6 +57,8 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
+    #rescue RuntimeError {redirect_to @project, flash: {error: "There are tasks open on this project. You cannot complete it yet!"}}
+
     @project = Project.find(params[:id])
 
     respond_to do |format|

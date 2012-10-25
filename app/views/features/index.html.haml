@@ -2,7 +2,8 @@
   = @project.name
   's current features
 
-%table{class: "table table-hover"}
+.alert.alert-success{style: "display: none;", id: "sorted"}
+%table{class: "table table-hover", id: "feature_table", name: @project.id}
   %thead
     %tr
       %th Name
@@ -11,14 +12,18 @@
       %th Priority
       %th Difficulty
   - @features.each do |feature|
-    %tr
+    %tr{id: feature.id}
       %td= feature.name
       %td= feature.description
-      %td= feature.state
+      %td
+        %span{class: "label label-#{feature.set_status_label}"}
+          = feature.state.humanize
       %td= feature.priority
       %td= feature.difficulty
-      %td= link_to 'Show', project_feature_path(feature)
-      %td= link_to 'Edit', edit_project_feature_path(feature)
-      %td= link_to 'Delete', project_feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+      %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+      %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
 %br
-= link_to 'New Feature', new_project_feature_path
+
+= link_to 'New Feature', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
+= link_to 'Back', project_path(@project), class: 'btn btn-success', type:'button'
