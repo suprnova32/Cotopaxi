@@ -43,8 +43,12 @@ class Feature < ActiveRecord::Base
   end
 
   def set_priority
-    self.priority = self.project.features.by_priority.last.priority
-    self.priority += 1
+    if self.project.features.by_priority.last
+      self.priority = self.project.features.by_priority.last.priority
+      self.priority += 1
+    else
+      self.priority = 1
+    end
   end
 
   def set_state_change_button

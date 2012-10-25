@@ -1,6 +1,7 @@
 
 $(document).ready(function(){
     $('.disabled').attr('href', '#');
+    $('.disabled').removeAttr('data-method');
     $('.alert').delay(5000).fadeOut();
     $('#feature_table').tableDnD({
         onDrop: function(table, row) {
@@ -14,7 +15,7 @@ $(document).ready(function(){
             }
             //debugStr += "Type of New Order: "+ newOrder;
             //$('#debugArea').html(debugStr);
-            $.post("/projects/sort_features.json", {order: newOrder, project_id: project}, function(data, status){$('#sorted').html("Priorities updated successfully!").fadeIn().delay(2000).fadeOut()});
+            $.post("/projects/sort_features.json", {order: newOrder, project_id: project}, function(data, status){$('#sorted').html("Priorities updated successfully!").fadeIn().delay(1500).fadeOut()});
 
         }//,
         /*onDragStart: function(table, row) {

@@ -19,6 +19,6 @@
       %td= feature.difficulty
       %td= link_to 'Show', project_feature_path(feature)
       %td= link_to 'Edit', edit_project_feature_path(feature)
-      %td= link_to 'Destroy', project_feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' }
+      %td= link_to 'Delete', project_feature_path(feature), method: :delete, data: { confirm: 'Are you sure?' }
 %br
 = link_to 'New Feature', new_project_feature_path
