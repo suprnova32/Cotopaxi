@@ -81,4 +81,20 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def sort_features
+    @project = Project.find(params[:project_id])
+    @order = params[:order]
+    @index = 1
+    @order.each do |order|
+      feature = @project.features.find(order)
+      feature.priority = @index
+      feature.save!
+      @index += 1
+    end
+    respond_to do |format|
+      format.json { render json: @order }
+    end
+
+  end
 end

@@ -3,6 +3,8 @@ Cotopaxi::Application.routes.draw do
     resources :features
   end
 
+  post 'projects/sort_features'
+
   root to: "projects#index"
   # The priority is based upon order of creation:
   # first created -> highest priority.

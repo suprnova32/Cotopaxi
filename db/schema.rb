@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(:version => 20121022103205) do
     t.string   "name",                               :null => false
     t.text     "description",                        :null => false
     t.string   "state",                              :default => "created"
-    t.integer  "priority",                           :unique => true
+    t.integer  "priority"
     t.integer  "difficulty"
     t.integer  "project_id",                         :null => false
     t.datetime "created_at",                         :null => false

@@ -2,7 +2,6 @@ class Feature < ActiveRecord::Base
   attr_accessible :description, :name, :state, :difficulty, :priority, :state_event
   belongs_to :project
   validates_presence_of :project, :name, :description
-  validates_uniqueness_of :priority
   scope :by_priority, order('priority asc')
 
   before_create :set_priority
