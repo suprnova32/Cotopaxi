@@ -13,6 +13,16 @@ describe ProjectsController do
     it { should respond_with :success }
     it { should render_template :show }
     it { should_not set_the_flash }
+
+    context "show edit projects form" do
+      before do
+        get :edit, id: 1
+      end
+
+      it { should respond_with :success }
+      it {should render_template :edit}
+      it { should_not set_the_flash }
+    end
   end
 
   context "show projects' index" do

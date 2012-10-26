@@ -1,7 +1,7 @@
 %legend= @project.name
 
 %table{class: "table table-bordered"}
-  %tr
+  %tr{class: @project.set_status_label}
     %td= @project.description
     %td{style: "text-align: center"}
       %span{class: "label label-#{@project.set_status_label}"}

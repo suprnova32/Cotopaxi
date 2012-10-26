@@ -78,10 +78,11 @@ class FeaturesController < ApplicationController
   # DELETE /features/1.json
   def destroy
     @feature = Feature.find(params[:id])
+    project = @feature.project
     @feature.destroy
 
     respond_to do |format|
-      format.html { redirect_to project_url }
+      format.html { redirect_to project_url(project), flash: {success: 'Feature was successfully deleted.'} }
       format.json { head :no_content }
     end
   end

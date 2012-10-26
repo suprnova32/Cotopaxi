@@ -79,7 +79,7 @@ class ProjectsController < ApplicationController
     @project.destroy
 
     respond_to do |format|
-      format.html { redirect_to projects_url }
+      format.html { redirect_to projects_url, flash: {success: 'Project was successfully deleted.'} }
       format.json { head :no_content }
     end
   end

@@ -20,11 +20,6 @@ class Feature < ActiveRecord::Base
     event :complete do
       transition :in_progress => :done
     end
-
-    event :done do
-
-    end
-
   end
 
   def get_difficulty
@@ -33,7 +28,7 @@ class Feature < ActiveRecord::Base
   end
   
   def get_priority
-    prio = {1 => 'Very Important', 2 => 'Important', 3 => 'Somewhat Important', 4 => 'Normal', 5 => 'Nice to have'}
+    prio = {(1..3) => 'Very Important', (4..6) => 'Important', (7..12) => 'Somewhat Important', (13..20) => 'Normal', (21..1000) => 'Nice to have'}
     prio[self.priority] + " (#{self.priority})"
   end
 

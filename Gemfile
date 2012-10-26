@@ -24,11 +24,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
+  gem 'capybara'
 end
 
 gem 'jquery-rails'
 gem 'devise'
-gem 'capybara'
 gem 'factory_girl_rails'
 gem 'formtastic-bootstrap'
 gem 'haml-rails'

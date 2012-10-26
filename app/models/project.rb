@@ -13,11 +13,6 @@ class Project < ActiveRecord::Base
     event :complete do
       transition :in_progress => :done
     end
-
-    event :done do
-
-    end
-
   end
 
   def features_done?
