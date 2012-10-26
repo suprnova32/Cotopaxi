@@ -7,7 +7,7 @@ class Feature < ActiveRecord::Base
   before_create :set_priority
 
   state_machine :state, initial: :created do
-    #after_transition on:  :start, do: :feature_started
+    after_transition on:  :start, do: :start_project
 
     event :start do
       transition :created => :started
@@ -59,6 +59,13 @@ class Feature < ActiveRecord::Base
   def set_disabled_button
     status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
     status[self.state]
+  end
+
+  def start_project
+    if self.project.state == 'created'
+      self.project.state = 'in_progress'
+      self.project.save!
+    end
   end
 
 

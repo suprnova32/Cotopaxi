@@ -1,13 +1,13 @@
 %legend Current Projects
 
-%table{class: "table table-hover"}
+%table{class: "table"}
   %thead
     %tr
       %th Name
       %th Description
       %th State
     - @projects.each do |project|
-      %tr
+      %tr{class: project.set_title_background}
         %td= project.name
         %td= project.description
         %td

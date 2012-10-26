@@ -10,6 +10,7 @@ feature "Projects & their features" do
     feature.name = "test feature"
     feature.description = "something"
     feature.project = project
+    feature.difficulty = 3
     feature.save!
   end
 
@@ -40,7 +41,6 @@ feature "Projects & their features" do
   scenario "GET /projects/1 and delete a feature" do
     visit '/projects/1'
     click_link "Delete"
-    #page.driver.browser.switch_to.alert.accept
     page.should have_content 'Feature was successfully deleted.'
   end
 
@@ -50,7 +50,45 @@ feature "Projects & their features" do
     page.should have_content 'Project was successfully deleted.'
   end
 
+  scenario "GET /projects/1 and cycle the state machine" do
+    visit '/projects/1'
+    click_link 'Start!'
+    page.should have_content 'Project was successfully updated.'
+    page.should have_content 'In progress'
+    click_link 'Complete!'
+    page.should have_content 'Edit Project: Test Name'
+  end
 
+  scenario "GET /projects/1/features and cycle the state machine" do
+    visit '/projects/1/features'
+    click_link 'Start!'
+    page.should have_content 'Feature was successfully updated.'
+    page.should have_content 'Started'
+    visit '/projects/1/features'
+    click_link 'Assign!'
+    page.should have_content 'Feature was successfully updated.'
+    page.should have_content 'In progress'
+    visit '/projects/1/features'
+    click_link 'Complete!'
+    page.should have_content 'Feature was successfully updated.'
+    page.should have_content 'Done'
+  end
 
+  scenario "GET /projects/1 and update it" do
+    visit '/projects/1'
+    click_link 'Edit Project'
+    fill_in "Description", with: "Updated description!"
+    click_button 'Update Project'
+    page.should have_content 'Project was successfully updated.'
+    page.should have_content 'Updated description!'
+  end
 
+  scenario "GET /projects/1/features/1 and update it" do
+    visit '/projects/1/features/1'
+    click_link 'Edit'
+    fill_in "Description", with: "Updated description!"
+    click_button 'Update Feature'
+    page.should have_content 'Feature was successfully updated.'
+    page.should have_content 'Updated description!'
+  end
 end

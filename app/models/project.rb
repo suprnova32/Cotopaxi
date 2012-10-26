@@ -29,6 +29,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def set_title_background
+    status = {'created' => 'info', 'in_progress' => 'warning', 'done' => 'success'}
+    status[self.state]
+  end
 
   def set_state_change_button
     status = {'created' => 'Start!', 'in_progress' => 'Complete!', 'done' => 'Done!'}
