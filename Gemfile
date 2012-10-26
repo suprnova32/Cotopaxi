@@ -23,6 +23,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'simplecov'
 end
 
 gem 'jquery-rails'
