@@ -10,12 +10,12 @@ class Feature < ActiveRecord::Base
     after_transition on:  :start, do: :start_project
 
     event :start do
-      transition :created => :started
+      transition :created => :in_progress
     end
 
-    event :assign do
-      transition :started => :in_progress
-    end
+    #event :assign do
+      #transition :started => :in_progress
+    #end
 
     event :complete do
       transition :in_progress => :done

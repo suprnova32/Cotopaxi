@@ -3,6 +3,7 @@ $(document).ready(function(){
     $('.disabled').attr('href', '#');
     $('.disabled').removeAttr('data-method');
     $('.alert').delay(5000).fadeOut();
+    $('.prevent').click(function(event){return confirm('You still have open features. Are you sure you want to complete the project?')});
     $('#feature_table').tableDnD({
         onDrop: function(table, row) {
             var rows = table.tBodies[0].rows;

@@ -1,0 +1,23 @@
+%legend Users:
+
+%table{class: "table table-hover"}
+  %thead
+    %tr
+      %th Email
+      %th First name
+      %th Last name
+      %th Nickname
+    - @users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.first_name
+        %td= user.last_name
+        %td= user.nickname
+        %td= link_to 'Show', user, class: 'btn btn-small', type:'button'
+        %td= link_to 'Edit', edit_user_path(user), class: 'btn btn-small btn-warning', type:'button'
+        %td= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-small btn-danger', type:'button'
+
+%br
+
+= link_to 'New User', new_user_path, class: 'btn btn-primary', type:'button'
+= link_to 'Back', projects_path, class: 'btn btn-success', type:'button'

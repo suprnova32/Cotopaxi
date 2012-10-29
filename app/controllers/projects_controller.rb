@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+
+  before_filter :authenticate_user!
   # GET /projects
   # GET /projects.json
   def index
@@ -36,6 +38,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    @users = User.all
   end
 
   # POST /projects
@@ -97,6 +100,11 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.json { render json: @order }
     end
+
+  end
+
+  def assign_roles
+    @project = Project.find(params[:project_id])
 
   end
 end

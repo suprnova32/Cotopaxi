@@ -1,0 +1,58 @@
+%legend Sign up
+
+= form_for(resource, :as => resource_name, :url => registration_path(resource_name), html: {class: "form-horizontal"}) do |f|
+  - if @user.errors.any?
+    .container
+      .alert.alert-danger
+        %h6= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
+        %ul
+          - @user.errors.full_messages.each do |msg|
+            %li= msg
+
+  %div{class: "control-group"}
+    = f.label :email, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-envelope"}
+        = f.text_field :email
+  %div{class: "control-group"}
+    = f.label :first_name, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.text_field :first_name
+  %div{class: "control-group"}
+    = f.label :last_name, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.text_field :last_name
+  %div{class: "control-group"}
+    = f.label :nickname, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.text_field :nickname
+  %div{class: "control-group"}
+    = f.label :password, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.password_field :password
+  %div{class: "control-group"}
+    = f.label :password_confirmation, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-arrow-right"}
+        = f.password_field :password_confirmation
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit class: "btn"
+
+= render "devise/shared/links"

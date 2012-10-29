@@ -1,0 +1,16 @@
+%legend Forgot your password?
+
+= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { method: :post, class: "form-horizontal" }) do |f|
+
+  %div{class: "control-group"}
+    = f.label :email, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-envelope"}
+        = f.email_field :email
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Send me reset password instructions", class: "btn"
+
+= render "devise/shared/links"

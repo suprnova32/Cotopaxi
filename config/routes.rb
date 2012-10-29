@@ -1,9 +1,15 @@
 Cotopaxi::Application.routes.draw do
+  devise_for :users
+
+  resources :users
+
   resources :projects do
     resources :features
   end
 
   post 'projects/sort_features'
+  post 'projects/assign_roles'
+  put 'projects/assign_roles'
 
   root to: "projects#index"
   # The priority is based upon order of creation:

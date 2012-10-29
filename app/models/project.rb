@@ -2,9 +2,11 @@ class Project < ActiveRecord::Base
   attr_accessible :description, :name, :state, :state_event
   has_many :features, dependent: :destroy
   validates_presence_of :description, :name
+  has_many :roles
+  has_many :users, through: :roles
 
   state_machine :state, initial: :created do
-    before_transition on:  :complete, do: :features_done?
+    #before_transition on:  :complete, do: :features_done?
 
     event :start do
       transition :created => :in_progress
@@ -58,7 +60,7 @@ class Project < ActiveRecord::Base
     if self.features_done?
       'btn-success'
     else
-      'disabled'
+      'btn-danger prevent'
     end
   end
 
@@ -67,6 +69,14 @@ class Project < ActiveRecord::Base
       "no_drag"
     else
       "feature_table"
+    end
+  end
+
+  def disable_new_feature
+    if self.state == 'done'
+      'disabled'
+    else
+      'btn-primary'
     end
   end
 end

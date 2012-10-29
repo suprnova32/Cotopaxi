@@ -10,5 +10,6 @@ class CreateFeatures < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :features, :project_id
   end
 end
