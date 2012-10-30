@@ -10,6 +10,9 @@
 
 
 
+-if @project.users == []
+  =render 'message'
+
 -if @project.features.any?
   = render "features/feature"
 -else

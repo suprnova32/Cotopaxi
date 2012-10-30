@@ -45,6 +45,12 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
+    #@project.roles << Role.new(role: :scrum_master, project_id: @project.id)
+    #@project.roles << Role.new(role: :product_owner, project_id: @project.id)
+    #@project.roles << Role.new(role: :stakeholder, project_id: @project.id)
+    #@project.roles << Role.new(role: :user, project_id: @project.id)
+    #@project.roles << Role.new(role: :team_member, project_id: @project.id)
+    #@project.save!
 
     respond_to do |format|
       if @project.save
@@ -62,7 +68,13 @@ class ProjectsController < ApplicationController
   def update
     #rescue RuntimeError {redirect_to @project, flash: {error: "There are tasks open on this project. You cannot complete it yet!"}}
 
-    @project = Project.find(params[:id])
+    if params[:id] == 'assign_roles'
+      new_params = params[:role]
+      @project = Project.find(new_params[:project_id])
+      @project.reassign_roles(params)
+    else
+      @project = Project.find(params[:id])
+    end
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -104,7 +116,14 @@ class ProjectsController < ApplicationController
   end
 
   def assign_roles
-    @project = Project.find(params[:project_id])
+    new_params = params[:role]
+    @project = Project.find(new_params[:project_id])
+    @project.assign_roles(new_params)
+    #@project = Project.find(params[:project_id])
+    respond_to do |format|
+      format.html { redirect_to project_url(@project), flash: {success: 'Project was successfully updated.'} }
+      format.json { head :no_content }
+    end
 
   end
 end

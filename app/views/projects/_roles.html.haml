@@ -1,23 +1,7 @@
 %legend Assign roles for project:
-
-= form_for(@project, url: '/projects/assign_roles', html: {class: "form-horizontal"}) do |f|
-  - if @project.errors.any?
-    %div{id: "error_explanation"}
-      %h2= pluralize(@project.errors.count, "error"); " prohibited this project from being saved:"
-      %ul
-        -@project.errors.full_messages.each do |msg|
-          %li= msg
-
-  %div{class: "control-group"}
-    %label{class: "control-label", for:"product_owner"}Product Owner:
-    %div{class: "controls"}
-      %div{class: "input-prepend"}
-        %span{class: "add-on"}
-          %i{class: "icon-user"}
-        %select{id:"product_owner"}
-          -@users.each do |user|
-            %option= user.nickname
-
-  %div{class: "control-group"}
-    %div{class: "controls"}
-      = f.submit "Assign!", class: "btn"
+=render 'assign_message'
+-if @project.users == []
+  =render 'new_roles'
+-else
+  =render 'edit_roles'
+%button{class: "btn btn-warning", id: "multiRoleAssign", "data-loading-text"=>"Applying Roles..."}Assign Roles

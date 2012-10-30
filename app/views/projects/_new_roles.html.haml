@@ -1,0 +1,123 @@
+-product_owner = Role.new(role: "product_owner", project_id: @project.id)
+= form_for(product_owner, url: url_for(controller: 'projects', action: 'assign_roles'), html: {class: "form-horizontal"}) do |f|
+  - if product_owner.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(product_owner.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -product_owner.errors.full_messages.each do |msg|
+          %li= msg
+  =f.hidden_field :project_id, value: @project.id
+  =f.hidden_field :role, value: product_owner.role
+  %div{class: "control-group"}
+    %label{class: "control-label"}
+      =product_owner.role.humanize
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}]
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Assign!", class: "btn", style: "display: none"
+
+-scrum_master = Role.new(role: "scrum_master", project_id: @project.id)
+= form_for(scrum_master, url: url_for(controller: 'projects', action: 'assign_roles'), html: {class: "form-horizontal"}) do |f|
+  - if scrum_master.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(scrum_master.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -scrum_master.errors.full_messages.each do |msg|
+          %li= msg
+  =f.hidden_field :project_id, value: @project.id
+  =f.hidden_field :role, value: scrum_master.role
+  %div{class: "control-group"}
+    %label{class: "control-label"}
+      =scrum_master.role.humanize
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}]
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Assign!", class: "btn", style: "display: none"
+
+-team_members = Role.new(role: "team_member", project_id: @project.id)
+= form_for(team_members, url: url_for(controller: 'projects', action: 'assign_roles'), html: {class: "form-horizontal"}) do |f|
+  - if team_members.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(team_members.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -team_members.errors.full_messages.each do |msg|
+          %li= msg
+  =f.hidden_field :project_id, value: @project.id
+  =f.hidden_field :role, value: team_members.role
+  %div{class: "control-group"}
+    %label{class: "control-label"}
+      =team_members.role.humanize
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, multiple: true
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Assign!", class: "btn", style: "display: none"
+
+-stakeholders = Role.new(role: "stakeholder", project_id: @project.id)
+= form_for(stakeholders, url: url_for(controller: 'projects', action: 'assign_roles'), html: {class: "form-horizontal"}) do |f|
+  - if stakeholders.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(stakeholders.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -stakeholders.errors.full_messages.each do |msg|
+          %li= msg
+  =f.hidden_field :project_id, value: @project.id
+  =f.hidden_field :role, value: stakeholders.role
+  %div{class: "control-group"}
+    %label{class: "control-label"}
+      =stakeholders.role.humanize
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, multiple: true
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Assign!", class: "btn", style: "display: none"
+
+-customers = Role.new(role: "customer", project_id: @project.id)
+= form_for(customers, url: url_for(controller: 'projects', action: 'assign_roles'), html: {class: "form-horizontal"}) do |f|
+  - if customers.errors.any?
+    %div{id: "error_explanation"}
+      %h2= pluralize(stakeholders.errors.count, "error"); " prohibited this project from being saved:"
+      %ul
+        -customers.errors.full_messages.each do |msg|
+          %li= msg
+  =f.hidden_field :project_id, value: @project.id
+  =f.hidden_field :role, value: customers.role
+  %div{class: "control-group"}
+    %label{class: "control-label"}
+      =customers.role.humanize
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-user"}
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, multiple: true
+  %div{class: "control-group"}
+    %div{class: "controls"}
+      = f.submit "Assign!", class: "btn"
+
+
+
+
+-#- @project.get_single_roles.each do |role_name|
+-#  =f.fields_for :roles, Role.new(role: role_name) do |builder|
+-#    =builder.hidden_field :project_id, value: @project.id
+-#    %div{class: "control-group"}
+-#      =builder.t :role, class: "control-label"
+-#      %div{class: "controls"}
+-#        %div{class: "input-prepend"}
+-#          %span{class: "add-on"}
+-#            %i{class: "icon-user"}
+-#          = builder.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}]

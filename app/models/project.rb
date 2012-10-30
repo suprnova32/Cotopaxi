@@ -1,9 +1,23 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :state_event
+  attr_accessible :description, :name, :state, :state_event, :roles_attributes
   has_many :features, dependent: :destroy
   validates_presence_of :description, :name
-  has_many :roles
+  has_many :roles, dependent: :destroy
   has_many :users, through: :roles
+  accepts_nested_attributes_for :roles
+
+  has_many :team_member_roles, class_name: Role.name, conditions: {:role => "team_member"}
+  has_many :team_members, through: :team_member_roles, source: :user
+
+  has_many :stakeholder_roles, class_name: Role.name, conditions: {:role => "stakeholder"}
+  has_many :stakeholders, through: :stakeholder_roles, source: :user
+
+  has_many :customer_roles, class_name: Role.name, conditions: {:role => "customer"}
+  has_many :customers, through: :customer_roles, source: :user
+
+
+  SINGLE_ROLES = [:scrum_master, :product_owner]
+  MANY_ROLES = [:customers, :stakeholders, :team_members]
 
   state_machine :state, initial: :created do
     #before_transition on:  :complete, do: :features_done?
@@ -15,6 +29,14 @@ class Project < ActiveRecord::Base
     event :complete do
       transition :in_progress => :done
     end
+  end
+
+  def get_single_roles
+    SINGLE_ROLES
+  end
+
+  def get_many_roles
+    MANY_ROLES
   end
 
   def features_done?
@@ -78,5 +100,30 @@ class Project < ActiveRecord::Base
     else
       'btn-primary'
     end
+  end
+
+  def reassign_roles(params)
+    new_params = params[:role]
+    @role = Role.find(new_params[:id])
+    @role.update_attributes(params[:role])
+  end
+
+  def assign_roles(params)
+    if params[:user_id].kind_of?(Array)
+      case params[:role]
+        when 'team_member'
+          self.team_member_ids = params[:user_id]
+        when 'stakeholder'
+          self.stakeholder_ids = params[:user_id]
+        when 'customer'
+          self.customer_ids = params[:user_id]
+        else
+          false
+      end
+    else
+      @role_to_be = Role.new(params)
+      @role_to_be.save!
+    end
+
   end
 end

@@ -1,8 +1,9 @@
 
 $(document).ready(function(){
+    $('.chzn-select').chosen();
     $('.disabled').attr('href', '#');
     $('.disabled').removeAttr('data-method');
-    $('.alert').delay(5000).fadeOut();
+    $('.notice').delay(5000).fadeOut();
     $('.prevent').click(function(event){return confirm('You still have open features. Are you sure you want to complete the project?')});
     $('#feature_table').tableDnD({
         onDrop: function(table, row) {
@@ -12,7 +13,7 @@ $(document).ready(function(){
             for (var i=0; i<rows.length; i++) {
                 newOrder[i] = rows[i].id;
             }
-            $.post("/projects/sort_features.json", {order: newOrder, project_id: project}, function(data, status){$('#sorted').html("Priorities updated successfully!").fadeIn().delay(1500).fadeOut()});
+            $.post("/projects/sort_features.json", {order: newOrder, project_id: project}, function(data, status){$('#sorted').html("Priorities updated successfully!").fadeIn().delay(2000).fadeOut()});
         }
     });
     $("#feature_table tr:even').addClass('tDnD_whileDrag')");

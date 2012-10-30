@@ -1,6 +1,6 @@
 - if notice
   .container
-    .alert.alert-info
+    .alert.alert-info.notice
       %button.close{"data-dismiss" => "alert", :type => "button"} ×
       = notice
 - elsif alert
@@ -10,11 +10,11 @@
       = alert
 - elsif flash[:error]
   .container
-    .alert.alert-danger
+    .alert.alert-danger.notice
       %button.close{"data-dismiss" => "alert", :type => "button"} ×
       = flash[:error]
 - elsif flash[:success]
   .container
-    .alert.alert-success
+    .alert.alert-success.notice
       %button.close{"data-dismiss" => "alert", :type => "button"} ×
       = flash[:success]
