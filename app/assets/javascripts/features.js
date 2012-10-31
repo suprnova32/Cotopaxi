@@ -10,6 +10,7 @@ function hideLoaders(){
 }
 
 $(document).ready(function(){
+    $('#assignChz').attr("class", "chzn-select");
     $('#modalShow').click(function(){
         $('#assign_modal').modal({"backdrop": "static"});
     });

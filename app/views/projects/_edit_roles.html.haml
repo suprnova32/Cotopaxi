@@ -7,7 +7,7 @@
       %label{class: "control-label"}
         =@project.roles[0].role.humanize
       %div{class: "controls"}
-        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, class: "chzn-select"
+        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, id: "assignChz"
 
   = form_for(@project.roles[1], url: "/projects/assign_roles.json", html: {class: "form-horizontal", id: "scrum_master_form"}) do |fs|
     =fs.hidden_field :project_id, value: @project.id
