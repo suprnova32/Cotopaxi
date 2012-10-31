@@ -20,7 +20,8 @@
   %span
     = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
 
-%a{href: "#assign_modal", role: "button", class: "btn", "data-toggle"=>"modal"}Assign Roles
+%button{class: "btn", id: "modalShow"}Assign Roles
+-#%a{href: "#assign_modal", role: "button", class: "btn", "data-toggle"=>"modal", id: "modalShow"}Assign Roles
 = render 'roles'
 = link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'
 = link_to 'Back', projects_path, class: 'btn', type:'button'

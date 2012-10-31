@@ -10,9 +10,16 @@ function hideLoaders(){
 }
 
 $(document).ready(function(){
+    $('#modalShow').click(function(){
+        $('#assign_modal').modal({"backdrop": "static"});
+    });
     $multiForm = $('#multiple-form');
     $scrumForm = $('#scrum_master_form');
     $ownerForm = $('#product_owner_form');
+    $path = window.location.pathname;
+    $('.modalClose').click(function(){
+        $('#manyForms').load($path+' #manyForms', function(){$('.chzn-select').chosen()});
+    });
     $('#multiRoleAssign').click(function(){
         $('.bar').attr("style", "width: 0%;");
         $('.show').fadeOut();
@@ -39,7 +46,6 @@ $(document).ready(function(){
     $('.disabled').attr('href', '#');
     $('.disabled').removeAttr('data-method');
     $('.notice').delay(5000).fadeOut();
-    //$("label[for$='_ids']").remove();
     $('.prevent').click(function(event){return confirm('You still have open features. Are you sure you want to complete the project?')});
     $('#feature_table').tableDnD({
         onDrop: function(table, row) {
