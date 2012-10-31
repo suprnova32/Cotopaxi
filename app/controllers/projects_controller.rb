@@ -17,6 +17,7 @@ class ProjectsController < ApplicationController
   def show
     @project = Project.find(params[:id])
     @features = @project.features.by_priority
+    @users = User.all
 
     respond_to do |format|
       format.html # show.html.erb
@@ -45,12 +46,9 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
-    #@project.roles << Role.new(role: :scrum_master, project_id: @project.id)
-    #@project.roles << Role.new(role: :product_owner, project_id: @project.id)
-    #@project.roles << Role.new(role: :stakeholder, project_id: @project.id)
-    #@project.roles << Role.new(role: :user, project_id: @project.id)
-    #@project.roles << Role.new(role: :team_member, project_id: @project.id)
-    #@project.save!
+    @project.roles << Role.new(role: :product_owner, project_id: @project.id)
+    @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
+    @project.save!
 
     respond_to do |format|
       if @project.save
@@ -66,8 +64,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
-    #rescue RuntimeError {redirect_to @project, flash: {error: "There are tasks open on this project. You cannot complete it yet!"}}
-
     if params[:id] == 'assign_roles'
       new_params = params[:role]
       @project = Project.find(new_params[:project_id])
@@ -119,10 +115,9 @@ class ProjectsController < ApplicationController
     new_params = params[:role]
     @project = Project.find(new_params[:project_id])
     @project.assign_roles(new_params)
-    #@project = Project.find(params[:project_id])
     respond_to do |format|
       format.html { redirect_to project_url(@project), flash: {success: 'Project was successfully updated.'} }
-      format.json { head :no_content }
+      format.json { render json: @project }
     end
 
   end

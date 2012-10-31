@@ -1,7 +1,10 @@
-%legend Assign roles for project:
-=render 'assign_message'
--if @project.users == []
-  =render 'new_roles'
--else
-  =render 'edit_roles'
-%button{class: "btn btn-warning", id: "multiRoleAssign", "data-loading-text"=>"Applying Roles..."}Assign Roles
+.modal.hide.fade{id: "assign_modal"}
+  .modal-header
+    %button{type: "button", class: "close", "data-dismiss"=>"modal", "aria-hidden" => "true"}x
+    %h5 Assign roles for project:
+  .modal-body
+    =render 'assign_message'
+    =render 'edit_roles'
+    %button{class: "btn btn-warning", id: "multiRoleAssign", "data-loading-text"=>"Applying Roles..."}Assign Roles
+  .modal-footer
+    %button{class: "btn", "data-dismiss"=>"modal", "aria-hidden" => "true"}Close

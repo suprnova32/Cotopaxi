@@ -1,6 +1,9 @@
--if @project.users == []
-  .container
-    .alert.alert-danger You haven't assigned any roles to the members of this project. Please do so below:
--else
-  .container
+.container.show{style: "display: none; width: 100%;"}
+  .alert.alert-success Roles have been successfully assigned!
+
+-if @project.users != []
+  .container.hide4{style: "width: 100%;"}
     .alert.alert-success Roles have already been assigned. You can edit them below:
+
+.progress.progress-striped.active{style: "display: none;", id: "loader"}
+  .bar{style: "width: 0%;"}

@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :state_event, :roles_attributes
+  attr_accessible :description, :name, :state, :state_event, :roles_attributes, :customer_ids, :stakeholder_ids, :team_member_ids
   has_many :features, dependent: :destroy
   validates_presence_of :description, :name
   has_many :roles, dependent: :destroy
@@ -14,6 +14,12 @@ class Project < ActiveRecord::Base
 
   has_many :customer_roles, class_name: Role.name, conditions: {:role => "customer"}
   has_many :customers, through: :customer_roles, source: :user
+
+  has_one :scrum_master_role, class_name: Role.name, conditions: {role: "scrum_master"}
+  has_one :scrum_master, through: :scrum_master_role, source: :user
+
+  has_one :product_owner_role, class_name: Role.name, conditions: {role: "product_owner"}
+  has_one :product_owner, through: :product_owner_role, source: :user
 
 
   SINGLE_ROLES = [:scrum_master, :product_owner]
