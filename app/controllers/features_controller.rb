@@ -1,7 +1,6 @@
 class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
-  before_filter :authenticate_user!
   def index
     #@features = Feature.by_priority
     @project = Project.find(params[:project_id])
