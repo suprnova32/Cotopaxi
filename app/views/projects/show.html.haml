@@ -11,7 +11,8 @@
 
 
 -if @project.users == []
-  =render 'message'
+  .container
+    .alert.alert-danger You haven't assigned any roles to the members of this project. Please do so now.
 
 -if @project.features.any?
   = render "features/feature"
