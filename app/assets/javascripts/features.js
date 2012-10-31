@@ -19,7 +19,9 @@ $(document).ready(function(){
     $ownerForm = $('#product_owner_form');
     $path = window.location.pathname;
     $('.modalClose').click(function(){
-        $('#manyForms').load($path+' #manyForms', function(){$('.chzn-select').chosen()});
+        $('#manyForms').load($path+' #manyForms', function(){
+            $('#assignChz').attr("class", "chzn-select");
+            $('.chzn-select').chosen()});
     });
     $('#multiRoleAssign').click(function(){
         $('.bar').attr("style", "width: 0%;");
