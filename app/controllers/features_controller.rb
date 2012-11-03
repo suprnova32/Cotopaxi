@@ -1,4 +1,10 @@
 class FeaturesController < ApplicationController
+
+  load_and_authorize_resource
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params[:project_id])
+  end
   # GET /features
   # GET /features.json
   def index

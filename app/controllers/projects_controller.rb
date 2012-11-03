@@ -1,6 +1,10 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params[:id])
+  end
+
   def index
     @projects = Project.all
 
@@ -27,6 +31,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = Project.new
+    authorize! :create, @project
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +41,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    authorize! :edit, Project
     @project = Project.find(params[:id])
     @users = User.all
   end
@@ -43,8 +49,9 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    authorize! :create, Project
     @project = Project.new(params[:project])
-    @project.roles << Role.new(role: :product_owner, project_id: @project.id)
+    @project.roles << Role.new(role: :product_owner, project_id: @project.id, user_id: current_user.id)
     @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
     @project.save!
 
@@ -62,6 +69,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   # PUT /projects/1.json
   def update
+    authorize! :update, Project
     if params[:id] == 'assign_roles'
       new_params = params[:role]
       @project = Project.find(new_params[:project_id])
@@ -84,6 +92,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    authorize! :destroy, Project
     @project = Project.find(params[:id])
     @project.destroy
 
@@ -94,6 +103,7 @@ class ProjectsController < ApplicationController
   end
 
   def sort_features
+    authorize! :update, Project
     @project = Project.find(params[:project_id])
     @order = params[:order]
     @index = 1
@@ -111,6 +121,8 @@ class ProjectsController < ApplicationController
 
   def assign_roles
     new_params = params[:role]
+    @current_ability ||= Ability.new(current_user, new_params[:project_id])
+    authorize! :update, Project
     @project = Project.find(new_params[:project_id])
     @project.assign_roles(new_params)
     respond_to do |format|

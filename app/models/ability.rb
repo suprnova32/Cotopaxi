@@ -1,7 +1,37 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user, project_id)
+    #user ||= User.new # guest user (not logged in)
+
+    if user.nickname == "AdM"
+      can :manage, :all
+    else
+      role = user.roles.find_by_project_id(project_id)
+      if role != nil
+        case role.role
+          when 'product_owner'
+            can :manage, Project
+            can :manage, Feature
+          when 'scrum_master'
+            can :manage, Project
+            can :manage, Feature
+          when 'customer'
+            can :read, Project
+          when 'stakeholder'
+            can :read, Project
+            can :read, Feature
+          when 'team_member'
+            can :read, Project
+            can :manage, Feature
+          else
+            can :read, :all
+        end
+      else
+        can :read, :all
+      end
+    end
+
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

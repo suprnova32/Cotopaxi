@@ -1,7 +1,11 @@
 .container.show{style: "display: none; width: 100%;"}
   .alert.alert-success Roles have been successfully assigned!
 
--if @project.users != []
+.container.showError{style: "display: none; width: 100%;"}
+  .alert.alert-danger You don't have permission to change the roles!
+
+
+-if @project.users.count != 1
   .container.hide4{style: "width: 100%;"}
     .alert.alert-success Roles have already been assigned. You can edit them below:
 

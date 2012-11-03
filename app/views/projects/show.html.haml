@@ -10,7 +10,7 @@
 
 
 
--if @project.users == []
+-if @project.users.count == 1
   .container
     .alert.alert-danger You haven't assigned any roles to the members of this project. Please do so now.
 
@@ -18,7 +18,8 @@
   = render "features/feature"
 -else
   %span
-    = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
+    -if can? :create, Feature
+      = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
 
 %button{class: "btn", id: "modalShow"}Assign Roles
 -#%a{href: "#assign_modal", role: "button", class: "btn", "data-toggle"=>"modal", id: "modalShow"}Assign Roles

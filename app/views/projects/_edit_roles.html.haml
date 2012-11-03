@@ -1,5 +1,5 @@
 #manyForms
-  = form_for(@project.roles[0], url: "/projects/assign_roles.json", html: {class: "form-horizontal", id: "product_owner_form"}) do |f|
+  = form_for(@project.roles[0], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "product_owner_form"}) do |f|
     =f.hidden_field :project_id, value: @project.id
     =f.hidden_field :role, value: @project.roles[0].role
     =f.hidden_field :id, value: @project.roles[0].id
@@ -9,7 +9,7 @@
       %div{class: "controls"}
         = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, id: "assignChz"
 
-  = form_for(@project.roles[1], url: "/projects/assign_roles.json", html: {class: "form-horizontal", id: "scrum_master_form"}) do |fs|
+  = form_for(@project.roles[1], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "scrum_master_form"}) do |fs|
     =fs.hidden_field :project_id, value: @project.id
     =fs.hidden_field :role, value: @project.roles[1].role
     =fs.hidden_field :id, value: @project.roles[1].id

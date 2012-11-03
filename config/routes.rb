@@ -8,8 +8,8 @@ Cotopaxi::Application.routes.draw do
   end
 
   post 'projects/sort_features'
-  post 'projects/assign_roles'
-  put 'projects/assign_roles'
+  post 'projects/:id/assign_roles' => 'projects#assign_roles'
+  put  'projects/:id/assign_roles' => 'projects#assign_roles'
 
   root to: "projects#index"
   # The priority is based upon order of creation:

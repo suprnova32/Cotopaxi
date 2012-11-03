@@ -30,18 +30,25 @@ $(document).ready(function(){
         showLoaders();
         $.post($ownerForm.attr('action'), $ownerForm.serializeArray(), function(data){
             if(data != null){
-                $('.bar').attr("style", "width: 33%;");
-                $.post($scrumForm.attr('action'), $scrumForm.serializeArray(), function(data){
-                    if(data != null){
-                        $('.bar').attr("style", "width: 66%;");
-                        $.post($multiForm.attr('action'), $multiForm.serializeArray(), function(data){
-                            $('.bar').attr("style", "width: 100%;");
-                            $('#loader').delay(800).fadeOut();
-                            $('.show').delay(1200).fadeIn();
-                            $('#manyForms').delay(1500).fadeIn();
-                        });
-                    }
-                });
+                var $response = $(data).find('#home').html();
+                if($response == 'Current Projects'){
+                    $('#loader').fadeOut();
+                    $('.showError').fadeIn();
+                    $('#manyForms').fadeIn();
+                } else {
+                    $('.bar').attr("style", "width: 33%;");
+                    $.post($scrumForm.attr('action'), $scrumForm.serializeArray(), function(data){
+                        if(data != null){
+                            $('.bar').attr("style", "width: 66%;");
+                            $.post($multiForm.attr('action'), $multiForm.serializeArray(), function(data){
+                                $('.bar').attr("style", "width: 100%;");
+                                $('#loader').delay(800).fadeOut();
+                                $('.show').delay(1200).fadeIn();
+                                $('#manyForms').delay(1500).fadeIn();
+                            });
+                        }
+                    });
+                }
             }
         });
     });

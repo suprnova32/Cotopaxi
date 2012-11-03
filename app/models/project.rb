@@ -37,14 +37,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def get_single_roles
-    SINGLE_ROLES
-  end
-
-  def get_many_roles
-    MANY_ROLES
-  end
-
   def features_done?
     counter = 0
     self.features.each do |feature|
