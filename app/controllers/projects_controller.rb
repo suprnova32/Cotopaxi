@@ -70,13 +70,7 @@ class ProjectsController < ApplicationController
   # PUT /projects/1.json
   def update
     authorize! :update, Project
-    if params[:id] == 'assign_roles'
-      new_params = params[:role]
-      @project = Project.find(new_params[:project_id])
-      @project.reassign_roles(params)
-    else
-      @project = Project.find(params[:id])
-    end
+    @project = Project.find(params[:id])
 
     respond_to do |format|
       if @project.update_attributes(params[:project])
@@ -121,9 +115,8 @@ class ProjectsController < ApplicationController
 
   def assign_roles
     new_params = params[:role]
-    @current_ability ||= Ability.new(current_user, new_params[:project_id])
     authorize! :update, Project
-    @project = Project.find(new_params[:project_id])
+    @project = Project.find(params[:id])
     @project.assign_roles(new_params)
     respond_to do |format|
       format.html { redirect_to project_url(@project), flash: {success: 'Project was successfully updated.'} }

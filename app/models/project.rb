@@ -100,28 +100,8 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def reassign_roles(params)
-    new_params = params[:role]
-    @role = Role.find(new_params[:id])
-    @role.update_attributes(params[:role])
-  end
-
   def assign_roles(params)
-    if params[:user_id].kind_of?(Array)
-      case params[:role]
-        when 'team_member'
-          self.team_member_ids = params[:user_id]
-        when 'stakeholder'
-          self.stakeholder_ids = params[:user_id]
-        when 'customer'
-          self.customer_ids = params[:user_id]
-        else
-          false
-      end
-    else
-      @role_to_be = Role.new(params)
-      @role_to_be.save!
-    end
-
+    @role_to_be = Role.find(params[:id])
+    @role_to_be.update_attributes(params)
   end
 end
