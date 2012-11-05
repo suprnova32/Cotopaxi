@@ -7,7 +7,7 @@ Cotopaxi::Application.routes.draw do
     resources :features
   end
 
-  post 'projects/sort_features'
+  post 'projects/:id/sort_features' => 'projects#sort_features'
   post 'projects/:id/assign_roles' => 'projects#assign_roles'
   put  'projects/:id/assign_roles' => 'projects#assign_roles'
 

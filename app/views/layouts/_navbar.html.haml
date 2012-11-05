@@ -30,15 +30,19 @@
                     %i{class:"icon-edit"}
                     Edit Projects
                 %li
-                  = link_to destroy_user_session_path, method: :delete do
+                  = link_to user_path(current_user) do
                     %i{class: "icon-user"}
+                    Manage Account
+                %li
+                  = link_to destroy_user_session_path, method: :delete do
+                    %i{class: "icon-off"}
                     Logout
-        -else
-          %form{class:"navbar-form pull-right", "accept-charset"=>"UTF-8", action:"/users/sign_in", method:"post"}
-            %div{style:"margin:0;padding:0;display:inline"}
-              %input{name:"utf8", type:"hidden", value:"&#x2713;"}
-              %input{name:"authenticity_token", type:"hidden", value:"n4ruSCfZGbg21Mjjvx9BnwOpqoyjQgrkUxfsrLkh2m4="}
-            %input{class:"span2", id:"user_email", name:"user[email]", type:"email", placeholder:"Email"}
-            %input{class:"span2", id:"user_password", name:"user[password]", type:"password", placeholder:"Password"}
-            %input{name: "user[remember_me]", type: "hidden", value: "0"}
-            %input{class:"btn", name:"commit", type:"submit", value:"Log in"}
+        -#-else
+        -#  %form{class:"navbar-form pull-right", "accept-charset"=>"UTF-8", action:"/users/sign_in", method:"post"}
+        -#    %div{style:"margin:0;padding:0;display:inline"}
+        -#      %input{name:"utf8", type:"hidden", value:"&#x2713;"}
+        -#      %input{name:"authenticity_token", type:"hidden", value:"n4ruSCfZGbg21Mjjvx9BnwOpqoyjQgrkUxfsrLkh2m4="}
+        -#    %input{class:"span2", id:"user_email", name:"user[email]", type:"email", placeholder:"Email"}
+        -#    %input{class:"span2", id:"user_password", name:"user[password]", type:"password", placeholder:"Password"}
+        -#    %input{name: "user[remember_me]", type: "hidden", value: "0"}
+        -#    %input{class:"btn", name:"commit", type:"submit", value:"Log in"}

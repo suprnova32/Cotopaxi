@@ -5,6 +5,9 @@
   .modal-body
     =render 'assign_message'
     =render 'edit_roles'
-    %button{class: "btn btn-warning", id: "multiRoleAssign", "data-loading-text"=>"Applying Roles..."}Assign Roles
+    -if can? :update, Project
+      %button{class: "btn btn-warning", id: "multiRoleAssign"}Assign Roles
+    -else
+      %button{class: "btn disabled"}Assign Roles
   .modal-footer
     %button{class: "btn modalClose", "data-dismiss"=>"modal", "aria-hidden" => "true"}Close

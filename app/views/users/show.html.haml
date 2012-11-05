@@ -1,18 +1,22 @@
-%p#notice= notice
+%legend #{if can? :manage, :all; @user.nickname+"'s" else "Your" end} Projects
 
-%p
-  %b Email:
-  = @user.email
-%p
-  %b First name:
-  = @user.first_name
-%p
-  %b Last name:
-  = @user.last_name
-%p
-  %b Nickname:
-  = @user.nickname
+%table{class: "table table-hover"}
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th State
+    -@user.projects.each do |project|
+      %tr{class: project.set_title_background}
+        %td= project.name
+        %td= project.description
+        %td
+          %span{class: "label label-#{project.set_status_label}"}
+            = project.state.humanize
+        %td= link_to 'Show', project, class: 'btn btn-small', type:'button'
+        %td= link_to 'Delete', project, class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to "#{project.set_state_change_button}", url_for(controller: :projects, action: :update, id: project.id, project: { state_event: project.set_state_transition }), class: "btn btn-small #{project.set_disabled_button} tBTN", type:'button', method: :put
+%br
 
-= link_to 'Edit', edit_user_path(@user)
-\|
-= link_to 'Back', users_path
+= link_to 'Edit User Details', edit_user_path(@user), class: 'btn btn-warning', type:'button'
+= link_to 'Back', users_path, class: 'btn btn-success', type:'button'

@@ -1,7 +1,4 @@
-%h1 Editing user
+%legend Edit user details
 
 = render 'form'
-
-= link_to 'Show', @user
-\|
-= link_to 'Back', users_path
+= link_to 'Back', user_path(@user), class: 'btn btn-success', type:'button'

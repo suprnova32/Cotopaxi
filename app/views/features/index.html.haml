@@ -3,7 +3,7 @@
   's current features
 
 .alert.alert-success{style: "display: none;", id: "sorted"}
-%table{class: "table table-hover", id: "feature_table", name: @project.id}
+%table{class: "table table-hover", id: if can? :update, Project; @project.drag_available else "no_drag" end, name: @project.id}
   %thead
     %tr
       %th Name
@@ -21,10 +21,12 @@
       %td= feature.priority
       %td= feature.difficulty
       %td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
-      %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
-      %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
-      %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
+      -if can? :manage, Feature
+        %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+        %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+        %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
 %br
 
-= link_to 'New Feature', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
+-if can? :manage, Feature
+  = link_to 'New Feature', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
 = link_to 'Back', project_path(@project), class: 'btn btn-success', type:'button'

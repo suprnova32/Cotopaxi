@@ -1,10 +1,11 @@
 class ProjectsController < ApplicationController
-  # GET /projects
-  # GET /projects.json
+
   def current_ability
     @current_ability ||= Ability.new(current_user, params[:id])
   end
 
+  # GET /projects
+  # GET /projects.json
   def index
     @projects = Project.all
 

@@ -22,19 +22,3 @@
   = semantic_form_for(@project, html: {class: "form-horizontal", id: "multiple-form"}) do |fd|
     -Project::MANY_ROLES.each do |role_name|
       =fd.input role_name, as: :select, member_label: :nickname, :input_html => {:class => "chzn-select"}
-
-
-
-
-
-
--#=f.fields_for :roles do |role|
--#  %fieldset
--#    =role.hidden_field :project_id, value: @project.id
--#    %div{class: "control-group"}
--#      %label{class: "control-label"} Product Owner
--#      %div{class: "controls"}
--#        %div{class: "input-prepend"}
--#          %span{class: "add-on"}
--#            %i{class: "icon-user"}
--#          = role.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}]

@@ -4,11 +4,6 @@ function showLoaders(){
     $('#loader').fadeIn();
 }
 
-function hideLoaders(){
-    $('#loader').fadeOut();
-    $('#manyForms').fadeIn();
-}
-
 $(document).ready(function(){
     $('#assignChz').attr("class", "chzn-select");
     $('#modalShow').click(function(){
@@ -45,6 +40,7 @@ $(document).ready(function(){
                                 $('#loader').delay(800).fadeOut();
                                 $('.show').delay(1200).fadeIn();
                                 $('#manyForms').delay(1500).fadeIn();
+                                $('#assignAlert').fadeOut();
                             });
                         }
                     });
@@ -56,16 +52,33 @@ $(document).ready(function(){
     $('.disabled').attr('href', '#');
     $('.disabled').removeAttr('data-method');
     $('.notice').delay(5000).fadeOut();
-    $('.prevent').click(function(event){return confirm('You still have open features. Are you sure you want to complete the project?')});
+    $('.prevent').click(function(event){
+        return confirm('You still have open features. Are you sure you want to complete the project?')
+    });
     $('#feature_table').tableDnD({
         onDrop: function(table, row) {
+            $('#loadingImage').show();
             var rows = table.tBodies[0].rows;
             var project = $('#feature_table').attr("name");
             var newOrder = new Array();
             for (var i=0; i<rows.length; i++) {
                 newOrder[i] = rows[i].id;
             }
-            $.post("/projects/sort_features.json", {order: newOrder, project_id: project}, function(data, status){$('#sorted').html("Priorities updated successfully!").fadeIn().delay(2000).fadeOut()});
+            var pathSort = window.location.pathname;
+            $.post(pathSort+"/sort_features.json", {order: newOrder, project_id: project}, function(data, xhr){
+                if(xhr != 'success'){
+                    $('#errorSort').html("An error has occurred. Please read the logs for more info.").fadeIn();
+                } else {
+                    var $response = $(data).find('#home').html();
+                    if($response == 'Current Projects'){
+                        $('#loadingImage').hide();
+                        $('#errorSort').html("Sorry, you don't have permission to do that!").fadeIn();
+                    } else {
+                        $('#sorted').html("Priorities updated successfully!").fadeIn().delay(4000).fadeOut();
+                        $('#loadingImage').delay().fadeOut();
+                    }
+                }
+            });
         }
     });
     $("#feature_table tr:even').addClass('tDnD_whileDrag')");

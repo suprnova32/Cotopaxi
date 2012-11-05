@@ -11,24 +11,28 @@ class Ability
       if role != nil
         case role.role
           when 'product_owner'
-            can :manage, Project
-            can :manage, Feature
+            can :manage, [Project, Feature]
+            can :manage, User, id: user.id
           when 'scrum_master'
-            can :manage, Project
-            can :manage, Feature
+            can :manage, [Project, Feature]
+            can :manage, User, id: user.id
           when 'customer'
-            can :read, Project
+            can :read, [Project, Feature]
+            can :manage, User, id: user.id
           when 'stakeholder'
-            can :read, Project
-            can :read, Feature
+            can :read, [Project, Feature]
+            can :manage, User, id: user.id
           when 'team_member'
             can :read, Project
             can :manage, Feature
+            can :manage, User, id: user.id
           else
-            can :read, :all
+            can :read, [Project, Feature]
+            can :manage, User, id: user.id
         end
       else
-        can :read, :all
+        can :read, [Project, Feature]
+        can :manage, User, id: user.id
       end
     end
 

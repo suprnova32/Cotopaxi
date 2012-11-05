@@ -8,7 +8,6 @@ class FeaturesController < ApplicationController
   # GET /features
   # GET /features.json
   def index
-    #@features = Feature.by_priority
     @project = Project.find(params[:project_id])
     @features = @project.features.by_priority
 
@@ -92,5 +91,4 @@ class FeaturesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
 end

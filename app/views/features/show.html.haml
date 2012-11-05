@@ -20,7 +20,7 @@
           = @feature.state.capitalize
 
 
-
-= link_to 'Edit', edit_project_feature_path(@feature.project, @feature), class: 'btn btn-warning', type:'button'
+-if can? :manage, Feature
+  = link_to 'Edit', edit_project_feature_path(@feature.project, @feature), class: 'btn btn-warning', type:'button'
+  = link_to 'Delete', project_feature_path(@feature.project, @feature), class: 'btn btn-danger', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
 = link_to 'Back', project_path(@feature.project), class: 'btn btn-success', type:'button'
-= link_to 'Delete', project_feature_path(@feature.project, @feature), class: 'btn btn-danger', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
