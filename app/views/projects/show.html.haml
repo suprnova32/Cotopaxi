@@ -7,6 +7,7 @@
       %span{class: "label label-#{@project.set_status_label}"}
         = @project.state.humanize
     -if can? :update, @project
+      %td{style: "text-align: center"}= link_to 'Delete', @project, class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
       %td{style: "text-align: center"}= link_to "#{@project.set_state_change_button}", url_for(controller: :projects, action: :update, id: @project.id, project: { state_event: @project.set_state_transition }), class: "btn btn-small #{@project.set_disabled_button} tBTN", type:'button', method: :put
 
 
@@ -23,11 +24,12 @@
       = link_to 'Add Features', new_project_feature_path(@project), class: 'btn btn-primary', type:'button'
 
 %button{class: "btn", id: "modalShow"}
-  -if can? :update, @project
+  -if can? :assign_roles, @project
     Assign Roles
   -else
-    View Roles
+    View Team
 = render 'roles'
 -if can? :update, Project
   = link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'
-= link_to 'Back', projects_path, class: 'btn', type:'button'
+-if current_user.projects.count != 1
+  = link_to 'Back', current_user, class: 'btn', type:'button'

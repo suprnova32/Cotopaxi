@@ -11,7 +11,7 @@ Cotopaxi::Application.routes.draw do
   post 'projects/:id/assign_roles' => 'projects#assign_roles'
   put  'projects/:id/assign_roles' => 'projects#assign_roles'
 
-  root to: "projects#index"
+  root to: "users#show"
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

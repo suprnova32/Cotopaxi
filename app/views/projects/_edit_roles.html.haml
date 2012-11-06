@@ -1,24 +1,16 @@
 #manyForms
-  = form_for(@project.roles[0], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "product_owner_form"}) do |f|
+  = semantic_form_for(@project.roles[0], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "product_owner_form"}) do |f|
     =f.hidden_field :project_id, value: @project.id
     =f.hidden_field :role, value: @project.roles[0].role
     =f.hidden_field :id, value: @project.roles[0].id
-    %div{class: "control-group"}
-      %label{class: "control-label"}
-        =@project.roles[0].role.humanize
-      %div{class: "controls"}
-        = f.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, id: "assignChz"
+    = f.input :user_id, as: :select, collection: Hash[@users.map{ |user| [user.nickname, user.id]}], label: "Product Owner", :input_html => {id: "assignChz"                                                                                        }
 
-  = form_for(@project.roles[1], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "scrum_master_form"}) do |fs|
+  = semantic_form_for(@project.roles[1], url: "/projects/#{@project.id}/assign_roles.json", html: {class: "form-horizontal", id: "scrum_master_form"}) do |fs|
     =fs.hidden_field :project_id, value: @project.id
     =fs.hidden_field :role, value: @project.roles[1].role
     =fs.hidden_field :id, value: @project.roles[1].id
-    %div{class: "control-group"}
-      %label{class: "control-label"}
-        =@project.roles[1].role.humanize
-      %div{class: "controls"}
-        = fs.select :user_id, Hash[@users.map{ |user| [user.nickname, user.id]}], {}, class: "chzn-select"
+    =fs.input :user_id, as: :select, collection: Hash[@users.map{ |user| [user.nickname, user.id]}], label: "Scrum Master", :input_html => {class: "chzn-select"}
 
   = semantic_form_for(@project, html: {class: "form-horizontal", id: "multiple-form"}) do |fd|
     -Project::MANY_ROLES.each do |role_name|
-      =fd.input role_name, as: :select, member_label: :nickname, :input_html => {:class => "chzn-select"}
+      =fd.input role_name, as: :select, member_label: :nickname, :input_html => {class: "chzn-select"}

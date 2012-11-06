@@ -57,8 +57,12 @@ class Feature < ActiveRecord::Base
   end
 
   def set_disabled_button
-    status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
-    status[self.state]
+    if self.project.state == 'done'
+      'disabled'
+    else
+      status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
+      status[self.state]
+    end
   end
 
   def start_project

@@ -9,6 +9,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    authorize! :manage, :all
     @users = User.all
 
     respond_to do |format|
@@ -20,7 +21,17 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    if params[:id].nil?
+      @user = current_user
+      if @user.projects.count == 1
+        redirect_to @user.projects[0] and return
+      end
+    else
+      @user = User.find(params[:id])
+      if @user.projects.count == 1 and current_user.nickname != 'AdM'
+        redirect_to @user.projects[0] and return
+      end
+    end
 
     respond_to do |format|
       format.html # show.html.erb

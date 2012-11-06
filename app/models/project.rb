@@ -37,6 +37,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def project_ability(user)
+    current_ability = Ability.new(user, self.id)
+  end
+
   def features_done?
     counter = 0
     self.features.each do |feature|

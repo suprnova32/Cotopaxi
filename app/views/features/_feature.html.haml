@@ -1,12 +1,10 @@
-%h5
-  = @project.name
-  's current features
+%h5 #{@project.name}'s current features
 %hr
 
 .alert.alert-success.notice{style: "display: none;", id: "sorted"}
 .alert.alert-danger.notice{style: "display: none;", id: "errorSort"}
 %img{style: "display: none;", id: "loadingImage", src: "/img/ajax-loader.gif"}
-%table{class: "table table-hover", id: if can? :update, Project; @project.drag_available else "no_drag" end, name: @project.id}
+%table{class: "table table-hover", id: if can? :prioritize_feature, @project; @project.drag_available else "no_drag" end, name: @project.id}
   %thead
     %tr
       %th Name
@@ -21,7 +19,7 @@
         %span{class: "label label-#{feature.set_status_label}"}
           = feature.state.humanize
       %td= feature.difficulty
-      %td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+      -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
       -if can? :manage, Feature
         %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
         %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }

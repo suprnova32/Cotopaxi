@@ -4,7 +4,7 @@ class Ability
   def initialize(user, project_id)
     #user ||= User.new # guest user (not logged in)
 
-    if user.nickname == "AdM"
+    if user.stakeholder
       can :manage, :all
     else
       role = user.roles.find_by_project_id(project_id)
@@ -12,19 +12,22 @@ class Ability
         case role.role
           when 'product_owner'
             can :manage, [Project, Feature]
+            can [:prioritize_feature,:assign_roles], Project
             can :manage, User, id: user.id
           when 'scrum_master'
             can :manage, [Project, Feature]
             can :manage, User, id: user.id
           when 'customer'
             can :read, [Project, Feature]
+            can :create, Feature
             can :manage, User, id: user.id
           when 'stakeholder'
-            can :read, [Project, Feature]
+            can :manage, Project
+            can [:create, :read], Feature
             can :manage, User, id: user.id
           when 'team_member'
             can :read, Project
-            can :manage, Feature
+            can :create, Feature
             can :manage, User, id: user.id
           else
             can :read, [Project, Feature]

@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
   # GET /projects/new.json
   def new
     @project = Project.new
-    authorize! :create, @project
+    #authorize! :create, @project
 
     respond_to do |format|
       format.html # new.html.erb
@@ -50,10 +50,11 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    authorize! :create, Project
+    #authorize! :create, Project
     @project = Project.new(params[:project])
-    @project.roles << Role.new(role: :product_owner, project_id: @project.id, user_id: current_user.id)
+    @project.roles << Role.new(role: :product_owner, project_id: @project.id)
     @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
+    @project.stakeholder_ids = current_user.id
     @project.save!
 
     respond_to do |format|
