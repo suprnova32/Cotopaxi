@@ -1,13 +1,26 @@
-set :application, "Cotopaxi"
-set :repository,  "set your repository location here"
+require 'bundler/capistrano'
+set :user, "pato"
+set :application, "cotopaxi"
 
-# set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
+set :rvm_ruby_string, '1.9.3'
+set :rvm_type, :user
+set :domain, "localhost"
+set :repository,  "#{user}@#{domain}:git/#{application}.git"
+set :deploy_to, "/home/#{user}/#{domain}"
+
+set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, "your web-server here"                          # Your HTTP server, Apache/etc
-role :app, "your app-server here"                          # This may be the same as your `Web` server
-role :db,  "your primary db-server here", :primary => true # This is where Rails migrations will run
-role :db,  "your slave db-server here"
+role :web, domain                          # Your HTTP server, Apache/etc
+role :app, domain                         # This may be the same as your `Web` server
+role :db,  domain, :primary => true # This is where Rails migrations will run
+#role :db,  "your slave db-server here"
+
+set :rails_env, :production
+
+task :seed do
+  run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+end
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
