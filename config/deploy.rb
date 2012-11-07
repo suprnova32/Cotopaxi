@@ -20,6 +20,10 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 set :rails_env, :production
 
 namespace :deploy do
+  desc "cause Passenger to initiate a restart"
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
   task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
   end
