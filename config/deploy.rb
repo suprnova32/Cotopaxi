@@ -1,12 +1,13 @@
-require 'bundler/capistrano'
+#require 'bundler/capistrano'
+require "rvm/capistrano"                               # Load RVM's capistrano plugin.
 set :user, "pato"
 set :application, "cotopaxi"
 
-set :rvm_ruby_string, '1.9.3-p286'
+set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 set :rvm_type, :user
 set :domain, "localhost"
 set :repository,  "#{user}@#{domain}:git/#{application}.git"
-set :deploy_to, "/home/#{user}/#{domain}"
+set :deploy_to, "/Users/#{user}/#{application}"
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
 # Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
