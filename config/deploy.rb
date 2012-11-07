@@ -5,7 +5,7 @@ set :application, "cotopaxi"
 
 set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 set :rvm_type, :user
-set :domain, "localhost"
+set :domain, "cotopaxi.co"
 set :repository,  "#{user}@#{domain}:git/#{application}.git"
 set :deploy_to, "/Users/#{user}/#{application}"
 
@@ -19,8 +19,14 @@ role :db,  domain, :primary => true # This is where Rails migrations will run
 
 set :rails_env, :production
 
-task :seed do
-  run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+namespace :deploy do
+  task :seed do
+    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
+  task :migrate do
+    run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
+  end
 end
 
 # if you want to clean up old releases on each deploy uncomment this:
