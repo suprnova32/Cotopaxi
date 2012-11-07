@@ -1,10 +1,10 @@
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :state_event, :roles_attributes, :customer_ids, :stakeholder_ids, :team_member_ids
+  attr_accessible :description, :name, :state, :state_event, :customer_ids, :stakeholder_ids, :team_member_ids, :sprint_duration
   has_many :features, dependent: :destroy
+  has_many :sprints, dependent: :destroy
   validates_presence_of :description, :name
   has_many :roles, dependent: :destroy
   has_many :users, through: :roles
-  accepts_nested_attributes_for :roles
 
   has_many :team_member_roles, class_name: Role.name, conditions: {:role => "team_member"}
   has_many :team_members, through: :team_member_roles, source: :user

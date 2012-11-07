@@ -1,6 +1,7 @@
 class Feature < ActiveRecord::Base
   attr_accessible :description, :name, :state, :difficulty, :priority, :state_event
   belongs_to :project
+  belongs_to :sprint
   validates_presence_of :project, :name, :description
   scope :by_priority, order('priority asc')
 

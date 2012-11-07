@@ -99,7 +99,7 @@ class ProjectsController < ApplicationController
   end
 
   def sort_features
-    authorize! :update, Project
+    authorize! :prioritize_feature, Project
     @project = Project.find(params[:project_id])
     @order = params[:order]
     @index = 1
@@ -117,7 +117,7 @@ class ProjectsController < ApplicationController
 
   def assign_roles
     new_params = params[:role]
-    authorize! :update, Project
+    authorize! :assign_roles, Project
     @project = Project.find(params[:id])
     @project.assign_roles(new_params)
     respond_to do |format|
@@ -125,5 +125,41 @@ class ProjectsController < ApplicationController
       format.json { render json: @project }
     end
 
+  end
+
+  def plan_sprint
+    @project = Project.find(params[:id])
+    if @project.sprints == []
+      @sprint = Sprint.new
+      @sprint.duration = @project.sprint_duration
+      @sprint.project = @project
+      @sprint.save!
+    elsif @project.sprints.last.state == 'done'
+      index = @project.sprints.last.number
+      index += 1
+      @sprint = Sprint.new
+      @sprint.duration = @project.sprint_duration
+      @sprint.project = @project
+      @sprint.number = index
+      @sprint.save!
+    else
+      @sprint = @project.sprints.last
+    end
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def confirm_sprint
+    #@project = Project.find(params[:id])
+    @sprint = Sprint.find(params[:sprint_id])
+    @feature = Feature.find(params[:feature_id])
+    @feature.sprint = @sprint
+    @feature.save!
+
+    respond_to do |format|
+      format.json {render json: @sprint}
+    end
   end
 end

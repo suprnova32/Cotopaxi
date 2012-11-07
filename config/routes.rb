@@ -10,6 +10,8 @@ Cotopaxi::Application.routes.draw do
   post 'projects/:id/sort_features' => 'projects#sort_features'
   post 'projects/:id/assign_roles' => 'projects#assign_roles'
   put  'projects/:id/assign_roles' => 'projects#assign_roles'
+  get 'projects/:id/plan_sprint' => 'projects#plan_sprint'
+  post 'projects/:id/confirm_sprint' => 'projects#confirm_sprint'
 
   root to: "users#show"
   # The priority is based upon order of creation:

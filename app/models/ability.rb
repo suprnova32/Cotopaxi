@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user, project_id)
-    #user ||= User.new # guest user (not logged in)
 
     if user.stakeholder
       can :manage, :all
@@ -11,7 +10,7 @@ class Ability
       if role != nil
         case role.role
           when 'product_owner'
-            can :manage, [Project, Feature]
+            can :manage, [Project, Feature, Sprint]
             can [:prioritize_feature,:assign_roles], Project
             can :manage, User, id: user.id
           when 'scrum_master'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121106133657) do
+ActiveRecord::Schema.define(:version => 20121107122800) do
 
   create_table "features", :force => true do |t|
     t.string   "name",                               :null => false
@@ -22,14 +22,18 @@ ActiveRecord::Schema.define(:version => 20121106133657) do
     t.integer  "project_id",                         :null => false
     t.datetime "created_at",                         :null => false
     t.datetime "updated_at",                         :null => false
+    t.integer  "sprint_id"
   end
 
+  add_index "features", ["project_id"], :name => "index_features_on_project_id"
+
   create_table "projects", :force => true do |t|
-    t.string   "name",                               :null => false
-    t.text     "description",                        :null => false
-    t.string   "state",       :default => "created"
-    t.datetime "created_at",                         :null => false
-    t.datetime "updated_at",                         :null => false
+    t.string   "name",                                   :null => false
+    t.text     "description",                            :null => false
+    t.string   "state",           :default => "created"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+    t.integer  "sprint_duration", :default => 604800
   end
 
   create_table "roles", :force => true do |t|
@@ -42,6 +46,15 @@ ActiveRecord::Schema.define(:version => 20121106133657) do
 
   add_index "roles", ["project_id"], :name => "index_roles_on_project_id"
   add_index "roles", ["user_id"], :name => "index_roles_on_user_id"
+
+  create_table "sprints", :force => true do |t|
+    t.integer  "duration"
+    t.integer  "project_id",                        :null => false
+    t.integer  "number",     :default => 1
+    t.string   "state",      :default => "created"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

@@ -21,5 +21,12 @@
           %i{class: "icon-tasks"}
         = f.text_area :description, rows: 8
   %div{class: "control-group"}
+    = f.label :sprint_duration, class: "control-label"
+    %div{class: "controls"}
+      %div{class: "input-prepend"}
+        %span{class: "add-on"}
+          %i{class: "icon-calendar"}
+        = f.select :sprint_duration, [["1 Week", 604800], ["2 Weeks", 1209600], ["3 Weeks", 1814400], ["4 Weeks", 2419200]]
+  %div{class: "control-group"}
     %div{class: "controls"}
       = f.submit class: "btn"

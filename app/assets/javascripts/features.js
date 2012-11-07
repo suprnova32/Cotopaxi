@@ -18,6 +18,21 @@ $(document).ready(function(){
             $('#assignChz').attr("class", "chzn-select");
             $('.chzn-select').chosen()});
     });
+    $('.draggable').draggable({ cursor: "move", helper: "clone"});
+    $('#dropZone').droppable({
+        drop: function (event, ui){
+            var dragClone = $(ui.draggable).clone();
+            dragClone.attr('class', 'cubic ui-sortable');
+            var featureID = dragClone.attr('id');
+            var projectID = $('#project_id').attr('name');
+            var sprintID = $('#dropZone').attr('name');
+            $(ui.draggable).fadeOut();
+            $('#dropZone').append(dragClone);
+            $('#dropZone').append("<br/>");
+            $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID});
+            //alert("Feature dropped with ID:"+ dragClone.attr('id'))
+        }
+    });
     $('#multiRoleAssign').click(function(){
         $('.bar').attr("style", "width: 0%;");
         $('.show').fadeOut();
