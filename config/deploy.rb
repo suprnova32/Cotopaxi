@@ -7,7 +7,7 @@ set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
 set :rvm_type, :user
 set :domain, "cotopaxi.co"
 set :repository,  "#{user}@#{domain}:git/#{application}.git"
-set :deploy_to, "/home/#{user}/#{application}"
+set :deploy_to, "/Users/#{user}/#{application}"
 set :use_sudo, false
 
 set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
