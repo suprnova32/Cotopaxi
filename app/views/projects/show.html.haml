@@ -14,7 +14,10 @@
 
 -if @project.users.count == 1
   .container#assignAlert
-    .alert.alert-danger You haven't assigned any roles to the members of this project. Please do so now.
+    .alert.alert-danger
+      %button.close{"data-dismiss" => "alert", :type => "button"} ×
+      You haven't assigned any roles to the members of this project. Please do so now.
+
 
 -if @project.features.any?
   = render "features/feature"
@@ -29,7 +32,10 @@
   -else
     View Team
 = render 'roles'
+-if can? :prioritize_feature, Project
+  = link_to @project.next_sprint_text, "/projects/#{@project.id}/plan_sprint", class: 'btn btn-warning', type:'button'
 -if can? :update, Project
   = link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'
+
 -if current_user.projects.count != 1
   = link_to 'Back', current_user, class: 'btn', type:'button'

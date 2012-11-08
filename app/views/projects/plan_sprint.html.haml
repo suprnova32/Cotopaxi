@@ -1,29 +1,35 @@
-%legend{id: "project_id", name: @project.id} We are going to create a sprint for project: #{@project.name}
+%legend{id: "project_id", name: @project.id}
+  Plan sprint for project: #{@project.name}
+  %small Sprint number: #{@sprint.number}
+  %span{class: "label label-#{@sprint.set_status_label}"}
+    =@sprint.state.humanize
+
 
 .row
   .span6
     %h5 Product backlog:
-    -@project.features.by_priority.each do |feature|
-      -if feature.sprint_id != @sprint.id
-        .cubic.draggable{id: feature.id}
-          %h3{class: "popover-title"}= feature.name
-          .popover-content
-            %p= feature.description
-        %br/
+    %ul#backDropZone{style: "list-style-type: none;", name: @sprint.id}
+      = render 'drop_zone'
+      -@project.features.by_priority.each do |feature|
+        -if feature.sprint.nil? #_id != @sprint.id
+          %li
+            .cubic.draggable{id: feature.id, name: 'droppedL'}
+              %h3{class: "popover-title"}= feature.name
+              .popover-content
+                %p= feature.description
+            -#%br/
 
   .span6
     %h5 Current Sprint backlog:
     %ul#dropZone{style: "list-style-type: none;", name: @sprint.id}
-      %li
-        .cubic.noSort
-          %h6{class: "popover-title"}
-            Drop items here.
-            %i{class: "icon-arrow-right"}
-        %br/
+      = render 'drop_zone'
       -@sprint.features.by_priority.each do |feature|
         %li
-          .cubic{id: feature.id}
+          .cubic.draggable{id: feature.id, name: 'droppedR'}
             %h3{class: "popover-title"}= feature.name
             .popover-content
               %p= feature.description
-          %br/
+          -#%br/
+
+%br/
+= link_to 'Back', project_path(@project), class: 'btn', type:'button'

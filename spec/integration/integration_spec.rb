@@ -7,6 +7,7 @@ feature "Projects & their features with login" do
     user.email = 'admin@goole.com'
     user.password = 'password'
     user.password_confirmation = 'password'
+    user.stakeholder = true
     user.save!
     visit '/users/sign_in'
     fill_in "user_email", with: "admin@goole.com"
@@ -15,7 +16,7 @@ feature "Projects & their features with login" do
     project = Project.new
     project.name = "Test Name"
     project.description = "Test description"
-    project.roles << Role.new(role: :product_owner, project_id: project.id, user_id: user.id)
+    project.roles << Role.new(role: :product_owner, project_id: project.id)
     project.roles << Role.new(role: :scrum_master, project_id: project.id)
     project.save!
     feature = Feature.new
@@ -56,13 +57,13 @@ feature "Projects & their features with login" do
   end
 
   scenario "GET /projects/1 and delete a feature" do
-    visit '/projects/1'
+    visit '/projects/1/features/1'
     click_link "Delete"
     page.should have_content 'Feature was successfully deleted.'
   end
 
   scenario "GET /projects and delete a project" do
-    visit '/projects'
+    visit '/projects/1'
     click_link 'Delete'
     page.should have_content 'Project was successfully deleted.'
   end

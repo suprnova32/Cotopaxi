@@ -25,6 +25,7 @@ describe UsersController do
     @user.email = 'admin@goole.com'
     @user.password = 'password'
     @user.password_confirmation = 'password'
+    @user.stakeholder = true
     @user.save!
   end
 

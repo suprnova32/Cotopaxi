@@ -8,6 +8,14 @@ describe Project do
 
   it {should have_many :features}
 
+  it {should have_many :stakeholders}
+
+  it {should have_many :team_members}
+
+  it {should have_many :users}
+
+  it {should have_many :customers}
+
   it 'raises an error if saved empty' do
     project = Project.new
     expect{project.save!}.to raise_error ActiveRecord::RecordInvalid

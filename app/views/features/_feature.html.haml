@@ -1,29 +1,96 @@
 %h5 #{@project.name}'s current features
-%hr
+%hr/
+-if @project.sprints == []
+  .container
+    .alert.alert-danger
+      %button.close{"data-dismiss" => "alert", :type => "button"} ×
+      No sprint has been planned yet!
 
 .alert.alert-success.notice{style: "display: none;", id: "sorted"}
 .alert.alert-danger.notice{style: "display: none;", id: "errorSort"}
 %img{style: "display: none;", id: "loadingImage", src: "/img/ajax-loader.gif"}
-%table{class: "table table-hover", id: if can? :prioritize_feature, @project; @project.drag_available else "no_drag" end, name: @project.id}
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Status
-      %th Difficulty
-  - @features.each do |feature|
-    %tr{id: feature.id}
-      %td= feature.name
-      %td= feature.description
-      %td
-        %span{class: "label label-#{feature.set_status_label}"}
-          = feature.state.humanize
-      %td= feature.difficulty
-      -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
-      -if can? :manage, Feature
-        %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
-        %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
-        %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
+%ul.nav.nav-tabs#sprintTab
+  %li.active
+    %a{href: "#allFeatures"} All features
+  -if @project.sprints.last
+    %li
+      %a{href: "#currentSprint"} Current Sprint
+    -if @project.get_unassigned_features.count != 0
+      %li
+        %a{href: "#noSprint"} Unassigned
+
+.tab-content
+  .tab-pane.active#allFeatures
+    %table{class: "table table-hover", id: if can? :prioritize_feature , @project and @project.sprints.last.nil?; @project.drag_available else "no_drag" end, name: @project.id}
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Status
+          %th Difficulty
+      - @features.each do |feature|
+        %tr{id: feature.id}
+          %td= feature.name
+          %td= feature.description
+          %td
+            %span{class: "label label-#{feature.set_status_label}"}
+              = feature.state.humanize
+          %td= feature.difficulty
+          -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+          -if can? :manage, Feature
+            %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+            %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+            %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
+
+  -if @project.sprints.last
+    .tab-pane#currentSprint
+      .alert.alert-info
+        -#%button.close{"data-dismiss" => "alert", :type => "button"} ×
+        Sprint status: #{@project.sprints.last.state.humanize}
+      %table{class: "table table-hover", id: "no_drag", name: @project.id}
+        %thead
+          %tr
+            %th Name
+            %th Description
+            %th Status
+            %th Difficulty
+        -@project.sprints.last.features.each do |feature|
+          %tr{id: feature.id}
+            %td= feature.name
+            %td= feature.description
+            %td
+              %span{class: "label label-#{feature.set_status_label}"}
+                = feature.state.humanize
+            %td= feature.difficulty
+            -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+            -if can? :manage, Feature
+              %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+              %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+              %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
+
+  .tab-pane#noSprint
+    %table{class: "table table-hover", id: if can? :prioritize_feature, @project; @project.drag_available else "no_drag" end, name: @project.id}
+      %thead
+        %tr
+          %th Name
+          %th Description
+          %th Status
+          %th Difficulty
+      -@features.each do |feature|
+        -if feature.sprint.nil?
+          %tr{id: feature.id}
+            %td= feature.name
+            %td= feature.description
+            %td
+              %span{class: "label label-#{feature.set_status_label}"}
+                = feature.state.humanize
+            %td= feature.difficulty
+            -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+            -if can? :manage, Feature
+              %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+              %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+              %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put
+
 
 -if can? :create, Feature
   = link_to 'New Feature', new_project_feature_path(@project), class: "btn #{@project.disable_new_feature}", type:'button'

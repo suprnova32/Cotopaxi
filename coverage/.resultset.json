@@ -2,7 +2,7 @@
   "RSpec": {
     "coverage": {
     },
-    "timestamp": 1352200912
+    "timestamp": 1352386593
   },
   "Functional Tests": {
     "coverage": {
@@ -384,11 +384,15 @@
         null,
         null,
         1,
+        0,
+        0,
+        0,
+        0,
+        0,
         null,
         0,
         0,
-        0,
-        0,
+        null,
         null,
         0,
         0,
@@ -501,6 +505,16 @@
         null,
         0,
         null,
+        null,
+        null,
+        1,
+        0,
+        0,
+        0,
+        0,
+        null,
+        null,
+        0,
         null,
         null,
         1,
@@ -792,6 +806,6 @@
         null
       ]
     },
-    "timestamp": 1352305795
+    "timestamp": 1352386715
   }
 }

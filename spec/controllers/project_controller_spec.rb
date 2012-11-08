@@ -8,6 +8,7 @@ describe ProjectsController do
       @user.email = 'admin@goole.com'
       @user.password = 'password'
       @user.password_confirmation = 'password'
+      @user.stakeholder = true
       @user.save!
       sign_in @user
       project = Project.new

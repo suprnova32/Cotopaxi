@@ -18,19 +18,49 @@ $(document).ready(function(){
             $('#assignChz').attr("class", "chzn-select");
             $('.chzn-select').chosen()});
     });
+    $('#sprintTab a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
     $('.draggable').draggable({ cursor: "move", helper: "clone"});
     $('#dropZone').droppable({
         drop: function (event, ui){
-            var dragClone = $(ui.draggable).clone();
-            dragClone.attr('class', 'cubic ui-sortable');
-            var featureID = dragClone.attr('id');
-            var projectID = $('#project_id').attr('name');
-            var sprintID = $('#dropZone').attr('name');
-            $(ui.draggable).fadeOut();
-            $('#dropZone').append(dragClone);
-            $('#dropZone').append("<br/>");
-            $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID});
-            //alert("Feature dropped with ID:"+ dragClone.attr('id'))
+            if(ui.draggable.attr('name') != 'droppedR'){
+                var dragClone = $(ui.draggable).clone();
+                dragClone.attr('class', 'cubic backDrag');
+                dragClone.attr('name', 'droppedR');
+                var featureID = dragClone.attr('id');
+                var projectID = $('#project_id').attr('name');
+                var sprintID = $('#dropZone').attr('name');
+                //$('.noSort').hide();
+                $(ui.draggable).fadeOut();
+                $(ui.draggable).next('br').fadeOut();
+                $('#dropZone').append(dragClone);
+                //$('#dropZone').append("<br/>");
+                $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID}, function(data){
+                    $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                });
+            }
+        }
+    });
+    $('#backDropZone').droppable({
+        drop: function (event, ui){
+            if(ui.draggable.attr('name') == 'droppedR'){
+                var dragClone = $(ui.draggable).clone();
+                dragClone.attr('class', 'cubic backDrag');
+                dragClone.attr('name', 'droppedL');
+                var featureID = dragClone.attr('id');
+                var projectID = $('#project_id').attr('name');
+                var sprintID = 0;
+                //$('.noSort').hide();
+                $(ui.draggable).fadeOut();
+                $(ui.draggable).next('br').fadeOut();
+                $('#backDropZone').append(dragClone);
+                //$('#backDropZone').append("<br/>");
+                $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID}, function(data){
+                    $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                });
+            }
         }
     });
     $('#multiRoleAssign').click(function(){

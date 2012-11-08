@@ -15,4 +15,9 @@ class Sprint < ActiveRecord::Base
     end
 
   end
+
+  def set_status_label
+    status = {'created' => 'info', 'started' => 'inverse', 'in_progress' => 'important', 'done' => 'success'}
+    status[self.state]
+  end
 end

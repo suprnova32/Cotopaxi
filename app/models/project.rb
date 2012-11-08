@@ -104,8 +104,29 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def get_unassigned_features
+    un_ass = []
+    self.features.each do |feature|
+      if feature.sprint.nil?
+        un_ass << feature
+      end
+    end
+    un_ass
+  end
+
   def assign_roles(params)
     @role_to_be = Role.find(params[:id])
     @role_to_be.update_attributes(params)
+  end
+
+  def next_sprint_text
+    case self.sprints.last.state
+      when 'done'
+        'Plan Next Sprint'
+      when 'in_progress'
+        'Review  Current Sprint'
+      else
+        'Plan Sprint'
+    end
   end
 end

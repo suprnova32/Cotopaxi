@@ -152,14 +152,30 @@ class ProjectsController < ApplicationController
   end
 
   def confirm_sprint
-    #@project = Project.find(params[:id])
-    @sprint = Sprint.find(params[:sprint_id])
     @feature = Feature.find(params[:feature_id])
-    @feature.sprint = @sprint
-    @feature.save!
+    if params[:sprint_id] != "0"
+      @sprint = Sprint.find(params[:sprint_id])
+      @feature.sprint = @sprint
+      @feature.save!
+    else
+      @feature.sprint = nil
+      @feature.save!
+    end
 
     respond_to do |format|
       format.json {render json: @sprint}
+    end
+  end
+
+  def state_sprint
+    @sprint = Sprint.find(params[:sprint_id])
+    respond_to do |format|
+      if @sprint.update_attributes(params[:sprint])
+        format.html { redirect_to project_url(@sprint.project), flash: {success: 'Sprint was successfully updated.'}}
+      else
+        format.html { redirect_to project_url(@sprint.project), flash: {error: "Sprint wasn't updated. Please try again."}}
+      end
+
     end
   end
 end
