@@ -1,0 +1,21 @@
+.tab-pane.active#allFeatures
+  %table{class: "table table-hover #{if can? :prioritize_feature, @project; @project.drag_available else "no_drag" end}", name: @project.id}
+    %thead
+      %tr
+        %th Name
+        %th Description
+        %th Status
+        %th Difficulty
+    - @features.each do |feature|
+      %tr{id: feature.id}
+        %td= feature.name
+        %td= feature.description
+        %td
+          %span{class: "label label-#{feature.set_status_label}"}
+            = feature.state.humanize
+        %td= feature.difficulty
+        -#%td= link_to 'Show', [@project, feature], class: 'btn btn-small', type:'button'
+        -if can? :manage, Feature
+          %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+          %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+          %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put

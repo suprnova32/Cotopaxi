@@ -1,0 +1,23 @@
+#fillWithThis
+  -@sprints.each do |sprint|
+    -if sprint.features != [] and sprint != @project.sprints.last
+      %h5 Sprint number #{sprint.number}:
+      %table{class: "table table-hover", name: @project.id}
+        %thead
+          %tr
+            %th Name
+            %th Description
+            %th Status
+            %th Difficulty
+        -sprint.features.each do |feature|
+          %tr{id: feature.id}
+            %td= feature.name
+            %td= feature.description
+            %td
+              %span{class: "label label-#{feature.set_status_label}"}
+                = feature.state.humanize
+            %td= feature.difficulty
+            -if can? :manage, feature
+              %td= link_to 'Edit', edit_project_feature_path(@project, feature), class: 'btn btn-warning btn-small', type:'button'
+              %td= link_to 'Delete', project_feature_path(@project, feature), class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
+              %td= link_to "#{feature.set_state_change_button}", url_for(controller: :features, action: :update, project_id: @project.id, id: feature.id, feature: { state_event: feature.set_state_transition }), class: "btn btn-small #{feature.set_disabled_button} tBTN", type:'button', method: :put

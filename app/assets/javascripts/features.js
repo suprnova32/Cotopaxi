@@ -13,6 +13,9 @@ $(document).ready(function(){
     $scrumForm = $('#scrum_master_form');
     $ownerForm = $('#product_owner_form');
     $path = window.location.pathname;
+    $('#pastS').click(function(e){
+        $('#pastSprints').load($path+"/past_sprints #fillWithThis");
+    });
     $('.modalClose').click(function(){
         $('#manyForms').load($path+' #manyForms', function(){
             $('#assignChz').attr("class", "chzn-select");
@@ -32,7 +35,6 @@ $(document).ready(function(){
                 var featureID = dragClone.attr('id');
                 var projectID = $('#project_id').attr('name');
                 var sprintID = $('#dropZone').attr('name');
-                //$('.noSort').hide();
                 $(ui.draggable).fadeOut();
                 $(ui.draggable).next('br').fadeOut();
                 $('#dropZone').append(dragClone);
@@ -52,7 +54,6 @@ $(document).ready(function(){
                 var featureID = dragClone.attr('id');
                 var projectID = $('#project_id').attr('name');
                 var sprintID = 0;
-                //$('.noSort').hide();
                 $(ui.draggable).fadeOut();
                 $(ui.draggable).next('br').fadeOut();
                 $('#backDropZone').append(dragClone);
@@ -100,17 +101,16 @@ $(document).ready(function(){
     $('.prevent').click(function(event){
         return confirm('You still have open features. Are you sure you want to complete the project?')
     });
-    $('#feature_table').tableDnD({
+    $('.feature_table').tableDnD({
         onDrop: function(table, row) {
             $('#loadingImage').show();
             var rows = table.tBodies[0].rows;
-            var project = $('#feature_table').attr("name");
             var newOrder = new Array();
             for (var i=0; i<rows.length; i++) {
                 newOrder[i] = rows[i].id;
             }
             var pathSort = window.location.pathname;
-            $.post(pathSort+"/sort_features.json", {order: newOrder, project_id: project}, function(data, xhr){
+            $.post(pathSort+"/sort_features.json", {order: newOrder}, function(data, xhr){
                 if(xhr != 'success'){
                     $('#errorSort').html("An error has occurred. Please read the logs for more info.").fadeIn();
                 } else {

@@ -32,7 +32,7 @@
   -else
     View Team
 = render 'roles'
--if can? :prioritize_feature, Project
+-if can? :prioritize_feature, Project and not @project.features_done? and @project.sprints.last and @project.get_unassigned_features.count != 0
   = link_to @project.next_sprint_text, "/projects/#{@project.id}/plan_sprint", class: 'btn btn-warning', type:'button'
 -if can? :update, Project
   = link_to 'Edit Project', edit_project_path(@project), class: 'btn btn-warning', type:'button'

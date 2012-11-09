@@ -100,7 +100,7 @@ class ProjectsController < ApplicationController
 
   def sort_features
     authorize! :prioritize_feature, Project
-    @project = Project.find(params[:project_id])
+    @project = Project.find(params[:id])
     @order = params[:order]
     @index = 1
     @order.each do |order|
@@ -164,18 +164,6 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       format.json {render json: @sprint}
-    end
-  end
-
-  def state_sprint
-    @sprint = Sprint.find(params[:sprint_id])
-    respond_to do |format|
-      if @sprint.update_attributes(params[:sprint])
-        format.html { redirect_to project_url(@sprint.project), flash: {success: 'Sprint was successfully updated.'}}
-      else
-        format.html { redirect_to project_url(@sprint.project), flash: {error: "Sprint wasn't updated. Please try again."}}
-      end
-
     end
   end
 end

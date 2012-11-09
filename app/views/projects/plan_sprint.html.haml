@@ -17,7 +17,6 @@
               %h3{class: "popover-title"}= feature.name
               .popover-content
                 %p= feature.description
-            -#%br/
 
   .span6
     %h5 Current Sprint backlog:
@@ -29,7 +28,7 @@
             %h3{class: "popover-title"}= feature.name
             .popover-content
               %p= feature.description
-          -#%br/
 
 %br/
 = link_to 'Back', project_path(@project), class: 'btn', type:'button'
+= link_to "#{@sprint.set_state_change_button}", url_for(controller: :sprints, action: :update, project_id: @project.id, id: @sprint.id, sprint: { state_event: @sprint.set_state_transition }), class: "btn #{@sprint.set_disabled_button}", type:'button', method: :put

@@ -48,12 +48,12 @@ class Feature < ActiveRecord::Base
   end
 
   def set_state_change_button
-    status = {'created' => 'Start!', 'started' => 'Assign!', 'in_progress' => 'Complete!', 'done' => 'Done!'}
+    status = {'created' => 'Start!', 'in_progress' => 'Complete!', 'done' => 'Done!'}
     status[self.state]
   end
 
   def set_state_transition
-    trans = {'created' => :start, 'started' => :assign, 'in_progress' => :complete, 'done' => :done}
+    trans = {'created' => :start, 'in_progress' => :complete, 'done' => :done}
     trans[self.state]
   end
 

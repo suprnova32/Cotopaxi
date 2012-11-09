@@ -1,83 +1,35 @@
 class SprintsController < ApplicationController
-  # GET /sprints
-  # GET /sprints.json
-  def index
-    @sprints = Sprint.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sprints }
-    end
-  end
-
-  # GET /sprints/1
-  # GET /sprints/1.json
-  def show
-    @sprint = Sprint.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sprint }
-    end
-  end
-
-  # GET /sprints/new
-  # GET /sprints/new.json
-  def new
-    @sprint = Sprint.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @sprint }
-    end
-  end
-
-  # GET /sprints/1/edit
-  def edit
-    @sprint = Sprint.find(params[:id])
-  end
-
-  # POST /sprints
-  # POST /sprints.json
-  def create
-    @sprint = Sprint.new(params[:sprint])
-
-    respond_to do |format|
-      if @sprint.save
-        format.html { redirect_to @sprint, notice: 'Sprint was successfully created.' }
-        format.json { render json: @sprint, status: :created, location: @sprint }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sprint.errors, status: :unprocessable_entity }
-      end
-    end
+  def current_ability
+    @current_ability ||= Ability.new(current_user, params[:id])
   end
 
   # PUT /sprints/1
   # PUT /sprints/1.json
   def update
+    @project = Project.find(params[:project_id])
     @sprint = Sprint.find(params[:id])
 
     respond_to do |format|
       if @sprint.update_attributes(params[:sprint])
-        format.html { redirect_to @sprint, notice: 'Sprint was successfully updated.' }
+        format.html { redirect_to @project, flash: {success: 'Sprint was successfully updated.' }}
         format.json { head :no_content }
       else
-        format.html { render action: "edit" }
+        format.html { redirect_to @project, flash: {error: "Sprint wasn't updated. Please try again."}}
         format.json { render json: @sprint.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /sprints/1
-  # DELETE /sprints/1.json
-  def destroy
-    @sprint = Sprint.find(params[:id])
-    @sprint.destroy
+  def past_sprints
+    @project = Project.find(params[:id])
+    @sprints = @project.sprints
 
     respond_to do |format|
-      format.html { redirect_to sprints_url }
-      format.json { head :no_content }
+      format.html # show.html.erb
+      format.json { render json: @sprint }
     end
+
   end
+
 end
