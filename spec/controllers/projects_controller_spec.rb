@@ -1,14 +1,15 @@
 require 'spec_helper'
+require "factory_girl"
 
 describe ProjectsController do
   context "create & show fictional project" do
     before do
-      @user = User.new
-      @user.nickname = 'AdM'
-      @user.email = 'admin@goole.com'
-      @user.password = 'password'
-      @user.password_confirmation = 'password'
-      @user.stakeholder = true
+      @user = Factory(:user)#User.new
+      #@user.nickname = 'AdM'
+      #@user.email = 'admin@goole.com'
+      #@user.password = 'password'
+      #@user.password_confirmation = 'password'
+      #@user.stakeholder = true
       @user.save!
       sign_in @user
       project = Project.new
@@ -29,7 +30,7 @@ describe ProjectsController do
         sign_in @user
         get :edit, id: 1
       end
-
+      it {should }
       it { should respond_with :success }
       it {should render_template :edit}
       it { should_not set_the_flash }
@@ -45,5 +46,21 @@ describe ProjectsController do
       it { should render_template :index }
       it { should_not set_the_flash }
     end
+  end
+
+  context 'test for CanCan exception' do
+    before do
+      @user = User.new
+      @user.nickname = 'ScA'
+      @user.email = 'admin@goole.com'
+      @user.password = 'password'
+      @user.password_confirmation = 'password'
+      @user.stakeholder = false
+      @user.save!
+      sign_in @user
+      get :new
+    end
+    it { should set_the_flash }
+    it { should redirect_to projects_url}
   end
 end

@@ -120,13 +120,18 @@ class Project < ActiveRecord::Base
   end
 
   def next_sprint_text
-    case self.sprints.last.state
-      when 'done'
-        'Plan Next Sprint'
-      when 'in_progress'
-        'Review  Current Sprint'
-      else
-        'Plan Sprint'
+    if self.sprints.last
+      case self.sprints.last.state
+        when 'done'
+          'Plan Next Sprint'
+        when 'in_progress'
+          'Review  Current Sprint'
+        else
+          'Plan Sprint'
+      end
+    else
+      'Plan Sprint'
     end
+
   end
 end
