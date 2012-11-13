@@ -3,6 +3,14 @@
   %small Sprint number: #{@sprint.number}
   %span{class: "label label-#{@sprint.set_status_label}"}
     =@sprint.state.humanize
+  -if @sprint.finish_date
+    -if Time.now < @sprint.finish_date
+      %br/
+      %small Sprint ends on #{@sprint.finish_date}
+    -else
+      %br/
+      %small Sprint ended on #{@sprint.finish_date}
+
 
 
 .row

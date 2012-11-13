@@ -5,6 +5,7 @@ class Sprint < ActiveRecord::Base
   validates_presence_of :project
 
   state_machine :state, initial: :created do
+    after_transition on:  :start, do: :set_finish_date
 
     event :start do
       transition :created => :in_progress
@@ -38,5 +39,10 @@ class Sprint < ActiveRecord::Base
       status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
       status[self.state]
     end
+  end
+
+  def set_finish_date
+    self.finish_date = self.created_at + self.duration
+    self.save!
   end
 end
