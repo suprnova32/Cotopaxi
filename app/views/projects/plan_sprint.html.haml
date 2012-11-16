@@ -39,4 +39,4 @@
 
 %br/
 = link_to 'Back', project_path(@project), class: 'btn', type:'button'
-= link_to "#{@sprint.set_state_change_button}", url_for(controller: :sprints, action: :update, project_id: @project.id, id: @sprint.id, sprint: { state_event: @sprint.set_state_transition }), class: "btn #{@sprint.set_disabled_button}", type:'button', method: :put
+= link_to "#{@sprint.set_state_change_button}", url_for(controller: :sprints, action: :update, project_id: @project.id, id: @sprint.id, sprint: { state_event: @sprint.set_state_transition }), class: "btn btn-success", type:'button', method: :put

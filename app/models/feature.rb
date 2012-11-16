@@ -27,11 +27,6 @@ class Feature < ActiveRecord::Base
     dif = {1 => 'Very easy', 2 => 'Easy', 3 => 'Medium', 4 => 'Hard', 5 => 'Really Hard', 6 => 'Almost Impossible'}
     dif[self.difficulty] + " (#{self.difficulty})"
   end
-  
-  def get_priority
-    prio = {(1..3) => 'Very Important', (4..6) => 'Important', (7..12) => 'Somewhat Important', (13..20) => 'Normal', (21..1000) => 'Nice to have'}
-    prio[self.priority] + " (#{self.priority})"
-  end
 
   def set_status_label
     status = {'created' => 'info', 'started' => 'inverse', 'in_progress' => 'important', 'done' => 'success'}

@@ -32,15 +32,6 @@ class Sprint < ActiveRecord::Base
     trans[self.state]
   end
 
-  def set_disabled_button
-    if self.project.state == 'done'
-      'disabled'
-    else
-      status = {'created' => 'btn-success', 'started' => 'btn-info', 'in_progress' => 'btn-success', 'done' => 'disabled'}
-      status[self.state]
-    end
-  end
-
   def set_finish_date
     self.finish_date = self.created_at + self.duration
     self.save!

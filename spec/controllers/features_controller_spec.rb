@@ -45,5 +45,51 @@ describe FeaturesController do
       it { should render_template :edit }
       it { should_not set_the_flash }
     end
+
+    context "POST" do
+      def do_request
+        project = FactoryGirl.create(:project)
+        post :create, {"feature"=>{"name"=>"Test 1", "description"=>"Test1", "difficulty"=>"3"}, "project_id"=>project.id}
+      end
+      context "create" do
+        context "success" do
+          before {do_request}
+          it {should assign_to :feature}
+          it { should respond_with :redirect }
+        end
+
+        context 'failure' do
+          before do
+            Feature.any_instance.stub(:save).and_return false
+            do_request
+          end
+          it {should render_template :new}
+        end
+      end
+
+      context "update" do
+        def update_request
+          project = FactoryGirl.create(:project)
+          feature = FactoryGirl.build(:feature)
+          feature.difficulty = 3
+          feature.project = project
+          feature.save!
+          post :update, {"feature"=>{"name"=>"Test 1", "description"=>"Test1", "difficulty"=>"7"}, "project_id"=>project.id, "id" => feature.id}
+        end
+        context "success" do
+          before {update_request}
+          it {should assign_to :feature}
+          it { should respond_with :redirect }
+        end
+
+        context 'failure' do
+          before do
+            Feature.any_instance.stub(:save).and_return false
+            update_request
+          end
+          it {should render_template :edit}
+        end
+      end
+    end
   end
 end

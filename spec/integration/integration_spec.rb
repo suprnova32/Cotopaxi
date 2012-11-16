@@ -2,34 +2,24 @@ require 'spec_helper'
 
 feature "Projects & their features with login" do
   background do
-    user = User.new
-    user.nickname = 'AdM'
-    user.email = 'admin@goole.com'
-    user.password = 'password'
-    user.password_confirmation = 'password'
-    user.stakeholder = true
-    user.save!
+    @user = FactoryGirl.create(:admin)
     visit '/users/sign_in'
-    fill_in "user_email", with: "admin@goole.com"
-    fill_in "user_password", with: "password"
+    fill_in "user_email", with: @user.email
+    fill_in "user_password", with: "testPassword"
     click_button "Sign in"
-    project = Project.new
-    project.name = "Test Name"
-    project.description = "Test description"
-    project.roles << Role.new(role: :product_owner, project_id: project.id)
-    project.roles << Role.new(role: :scrum_master, project_id: project.id)
-    project.save!
-    feature = Feature.new
-    feature.name = "test feature"
-    feature.description = "something"
-    feature.project = project
+    @project = FactoryGirl.build(:project)
+    @project.roles << Role.new(role: :product_owner, project_id: @project.id, user_id: @user.id)
+    @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
+    @project.save!
+    feature = FactoryGirl.build(:feature)
     feature.difficulty = 3
+    feature.project = @project
     feature.save!
   end
 
   scenario "GET /users" do
     visit '/users'
-    page.should have_content "AdM"
+    page.should have_content "NiC"
   end
 
   scenario "GET /projects" do
@@ -64,13 +54,13 @@ feature "Projects & their features with login" do
 
   scenario "GET /projects and delete a project" do
     visit '/projects/1'
-    click_link 'Delete'
+    click_link 'deleteP'
     page.should have_content 'Project was successfully deleted.'
   end
 
   scenario "GET /projects/1 and cycle the state machine" do
     visit '/projects/1'
-    click_link 'Start!'
+    click_link 'projectState'
     page.should have_content 'Project was successfully updated.'
     page.should have_content 'In progress'
     click_link 'Complete!'
@@ -99,10 +89,34 @@ feature "Projects & their features with login" do
 
   scenario "GET /projects/1/features/1 and update it" do
     visit '/projects/1/features/1'
-    click_link 'Edit'
+    page.should have_content 'Medium'
+    click_link 'editF'
     fill_in "Description", with: "Updated description!"
     click_button 'Update Feature'
     page.should have_content 'Feature was successfully updated.'
     page.should have_content 'Updated description!'
   end
+
+  scenario "GET /projects/1 create a sprint and start it" do
+    visit '/projects/1'
+    click_link 'Plan Sprint'
+    page.should have_content 'Sprint number: 1'
+    click_link 'Begin Sprint!'
+    page.should have_content 'Sprint was successfully updated.'
+  end
+
+  scenario "GET /projects/1 and create a second sprint" do
+    sprint = Sprint.new
+    sprint.project = @project
+    sprint.state = 'done'
+    sprint.save!
+    visit '/projects/1'
+    click_link 'Plan Next Sprint'
+    page.should have_content 'Sprint number: 2'
+    click_link 'Back'
+    page.should have_content "Test description"
+    click_link 'Review Current Sprint'
+    page.should have_content 'Created'
+  end
+
 end

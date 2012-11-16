@@ -18,3 +18,6 @@
     .alert.alert-success.notice
       %button.close{"data-dismiss" => "alert", :type => "button"} ×
       = flash[:success]
+.container#topAlertCont{style: 'display: none;'}
+  .alert.alert-danger#topAlert
+    %button.close{"data-dismiss" => "alert", :type => "button"} ×

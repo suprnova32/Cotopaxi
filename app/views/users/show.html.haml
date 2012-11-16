@@ -16,6 +16,6 @@
         %td= link_to 'View Details', project, class: 'btn btn-small', type:'button'
         -#%td= link_to 'Delete', project, class: 'btn btn-danger btn-small', type:'button', method: :delete, data: { confirm: 'Are you sure?' }
         -#%td= link_to "#{project.set_state_change_button}", url_for(controller: :projects, action: :update, id: project.id, project: { state_event: project.set_state_transition }), class: "btn btn-small #{project.set_disabled_button} tBTN", type:'button', method: :put
-%br
+
 -if can? :manage, :all
-  = link_to 'All Users', users_path, class: 'btn btn-success', type:'button'
+  = link_to 'New Project', new_project_path, class: 'btn btn-primary', type:'button'

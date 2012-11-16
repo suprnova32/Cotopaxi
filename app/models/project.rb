@@ -126,6 +126,8 @@ class Project < ActiveRecord::Base
           'Plan Next Sprint'
         when 'in_progress'
           'Review  Current Sprint'
+        when 'created'
+          'Review  Current Sprint'
         else
           'Plan Sprint'
       end

@@ -4,17 +4,9 @@ require "factory_girl"
 describe ProjectsController do
   context "create & show fictional project" do
     before do
-      @user = Factory(:user)#User.new
-      #@user.nickname = 'AdM'
-      #@user.email = 'admin@goole.com'
-      #@user.password = 'password'
-      #@user.password_confirmation = 'password'
-      #@user.stakeholder = true
-      @user.save!
+      @user = FactoryGirl.create(:admin)
       sign_in @user
-      project = Project.new
-      project.name = "Test Name"
-      project.description = "Test description"
+      project = FactoryGirl.build(:project)
       project.roles << Role.new(role: :product_owner, project_id: project.id, user_id: @user.id)
       project.roles << Role.new(role: :scrum_master, project_id: project.id)
       project.save!
@@ -50,13 +42,7 @@ describe ProjectsController do
 
   context 'test for CanCan exception' do
     before do
-      @user = User.new
-      @user.nickname = 'ScA'
-      @user.email = 'admin@goole.com'
-      @user.password = 'password'
-      @user.password_confirmation = 'password'
-      @user.stakeholder = false
-      @user.save!
+      @user = FactoryGirl.create(:user)
       sign_in @user
       get :new
     end

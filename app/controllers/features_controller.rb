@@ -50,7 +50,8 @@ class FeaturesController < ApplicationController
   # POST /features.json
   def create
     @feature = Feature.new(params[:feature])
-    @feature.project = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id])
+    @feature.project = @project
 
     respond_to do |format|
       if @feature.save

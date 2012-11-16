@@ -17,6 +17,3 @@
   = render 'features/tab_current_sprint'
   = render 'features/tab_no_sprint'
   .tab-pane#pastSprints
-
--if can? :create, Feature
-  = link_to 'New Feature', new_project_feature_path(@project), class: "btn #{@project.disable_new_feature}", type:'button'

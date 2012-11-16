@@ -56,7 +56,6 @@ class ProjectsController < ApplicationController
     @project.roles << Role.new(role: :product_owner, project_id: @project.id)
     @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
     @project.stakeholder_ids = current_user.id
-    @project.save!
 
     respond_to do |format|
       if @project.save
@@ -157,14 +156,17 @@ class ProjectsController < ApplicationController
     if params[:sprint_id] != "0"
       @sprint = Sprint.find(params[:sprint_id])
       @feature.sprint = @sprint
-      @feature.save!
     else
       @feature.sprint = nil
-      @feature.save!
     end
 
     respond_to do |format|
-      format.json {render json: @sprint}
+      if @feature.save
+        format.json {render json: @sprint}
+      else
+        format.json {render json: @sprint.errors, status: :unprocessable_entity}
+      end
+
     end
   end
 end

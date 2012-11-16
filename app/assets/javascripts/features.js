@@ -35,12 +35,20 @@ $(document).ready(function(){
                 var featureID = dragClone.attr('id');
                 var projectID = $('#project_id').attr('name');
                 var sprintID = $('#dropZone').attr('name');
-                $(ui.draggable).fadeOut();
-                $(ui.draggable).next('br').fadeOut();
-                $('#dropZone').append(dragClone);
-                //$('#dropZone').append("<br/>");
-                $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID}, function(data){
-                    $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                $.ajax({
+                    type: "POST",
+                    url: "/projects/"+projectID+"/confirm_sprint.json",
+                    data: {feature_id: featureID, sprint_id: sprintID},
+                    success: function(){
+                        $(ui.draggable).fadeOut();
+                        $(ui.draggable).next('br').fadeOut();
+                        $('#dropZone').append(dragClone);
+                        $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                    },
+                    error: function(){
+                        $('#topAlert').html('Something went wrong while saving the sprint. Please check your server logs.');
+                        $('#topAlertCont').fadeIn();
+                    }
                 });
             }
         }
@@ -54,12 +62,20 @@ $(document).ready(function(){
                 var featureID = dragClone.attr('id');
                 var projectID = $('#project_id').attr('name');
                 var sprintID = 0;
-                $(ui.draggable).fadeOut();
-                $(ui.draggable).next('br').fadeOut();
-                $('#backDropZone').append(dragClone);
-                //$('#backDropZone').append("<br/>");
-                $.post("/projects/"+projectID+"/confirm_sprint.json", {feature_id: featureID, sprint_id: sprintID}, function(data){
-                    $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                $.ajax({
+                    type: "POST",
+                    url: "/projects/"+projectID+"/confirm_sprint.json",
+                    data: {feature_id: featureID, sprint_id: sprintID},
+                    success: function(){
+                        $(ui.draggable).fadeOut();
+                        $(ui.draggable).next('br').fadeOut();
+                        $('#backDropZone').append(dragClone);
+                        $('.backDrag').draggable({ cursor: "move", helper: "clone"});
+                    },
+                    error: function(){
+                        $('#topAlert').html('Something went wrong while saving the sprint. Please check your server logs.');
+                        $('#topAlertCont').fadeIn();
+                    }
                 });
             }
         }

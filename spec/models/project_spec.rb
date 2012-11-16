@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'factory_girl'
 
 describe Project do
 
@@ -25,18 +26,33 @@ describe Project do
 
   context "with Project Object" do
     before do
-      @project = Project.new
-      @project.name = "Test Name"
-      @project.description = "Test description"
-      @project.save!
-      @feature = Feature.new
+      @project = FactoryGirl.create(:project)
+      @user = FactoryGirl.create(:user)
+      @project.roles << Role.new(role: :product_owner, project_id: @project.id, user_id: @user.id)
+      @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
+      @feature = FactoryGirl.build(:feature)
       @feature.project = @project
-      @feature.name = 'Test Feat'
-      @feature.description = 'some desc'
       @feature.save!
     end
     it 'can include features' do
       @project.features.should include @feature
+    end
+
+    it 'can assign roles and have ability' do
+      params = {id: "1", project_id: "1", role: "scrum_master", user_id: "1"}
+      @project.project_ability(@user).should be_a_kind_of Ability
+      @project.assign_roles(params).should be true
+    end
+
+    it 'evaluates sprint button text' do
+      @sprint = Sprint.new
+      @sprint.state = 'foo'
+      @project.sprints << @sprint
+      @project.next_sprint_text.should eq 'Plan Sprint'
+    end
+
+    it 'can get unassigned features' do
+      @project.get_unassigned_features.should be_a_kind_of Array
     end
 
     it 'should return String methods' do
