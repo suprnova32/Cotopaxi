@@ -49,4 +49,49 @@ describe ProjectsController do
     it { should set_the_flash }
     it { should redirect_to projects_url}
   end
+
+  context "POST" do
+    before do
+      @user = FactoryGirl.create(:admin)
+      sign_in @user
+    end
+    def do_request
+      post :create, {"project"=>{"name"=>"Test 1", "description"=>"Test1", "sprint_duration"=>"604800"}}
+    end
+    context "create" do
+      context "success" do
+        before {do_request}
+        it {should assign_to :project}
+        it { should respond_with :redirect }
+      end
+
+      context 'failure' do
+        before do
+          Project.any_instance.stub(:save).and_return false
+          do_request
+        end
+        it {should render_template :new}
+      end
+    end
+
+    context "update" do
+      def update_request
+        project = FactoryGirl.create(:project)
+        post :update, {"project"=>{"name"=>"Test 1", "description"=>"Test3", "sprint_duration"=>"604800"}, "id"=>project.id}
+      end
+      context "success" do
+        before {update_request}
+        it {should assign_to :project}
+        it { should respond_with :redirect }
+      end
+
+      context 'failure' do
+        before do
+          Project.any_instance.stub(:save).and_return false
+          update_request
+        end
+        it {should render_template :edit}
+      end
+    end
+  end
 end
