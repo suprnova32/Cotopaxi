@@ -93,5 +93,59 @@ describe ProjectsController do
         it {should render_template :edit}
       end
     end
+
+    context "sort_features" do
+      before do
+        project = FactoryGirl.create(:project)
+        @features = []
+        (0..4).each do
+          feature = FactoryGirl.build(:feature)
+          feature.difficulty = 3
+          feature.project = project
+          feature.save!
+          @features << feature.id
+        end
+        post :sort_features, {"order"=>@features, "id"=>project.id}
+      end
+      it {should respond_with 406}
+    end
+
+    context "assign_roles" do
+      before do
+        project = FactoryGirl.build(:project)
+        project.roles << Role.new(role: :product_owner, project_id: project.id, user_id: @user.id)
+        project.save!
+        post :assign_roles, {"role"=>{"project_id"=>project.id, "role"=>"scrum_master", "id"=>project.roles[0].id, "user_id"=>@user.id}, "id"=>project.id}
+      end
+      it {should respond_with 302}
+    end
+
+    context "confirm_sprint" do
+      def generate_data
+        project = FactoryGirl.create(:project)
+        feature = FactoryGirl.build(:feature)
+        feature.difficulty = 3
+        feature.project = project
+        feature.save!
+        sprint = Sprint.new
+        sprint.project = project
+        sprint.save!
+      end
+      context "put feature in sprint" do
+        before do
+          generate_data
+          post :confirm_sprint, {"feature_id"=>feature.id, "sprint_id"=>sprint.id, "id"=>project.id}
+        end
+        it {should respond_with 406}
+      end
+
+      context "remove feature form sprint" do
+        before do
+          generate_data
+          post :confirm_sprint, {"feature_id"=>feature.id, "sprint_id"=>"0", "id"=>project.id}
+        end
+        it {should respond_with 406}
+      end
+    end
   end
 end

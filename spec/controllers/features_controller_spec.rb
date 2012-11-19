@@ -4,23 +4,15 @@ describe FeaturesController do
 
   context "display add features" do
     before do
-      user = User.new
-      user.nickname = 'AdM'
-      user.email = 'admin@goole.com'
-      user.password = 'password'
-      user.password_confirmation = 'password'
-      user.stakeholder = true
-      user.save!
-      sign_in user
-      project = Project.new
-      project.name = "Test Name"
-      project.description = "Test description"
+      @user = FactoryGirl.create(:admin)
+      sign_in @user
+      project = FactoryGirl.build(:project)
+      project.roles << Role.new(role: :product_owner, project_id: project.id, user_id: @user.id)
+      project.roles << Role.new(role: :scrum_master, project_id: project.id)
       project.save!
-      feature = Feature.new
-      feature.name = "test feature"
-      feature.description = "something"
-      feature.project = project
+      feature = FactoryGirl.build(:feature)
       feature.difficulty = 3
+      feature.project = project
       feature.save!
       get :new, project_id: 1
     end
