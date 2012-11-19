@@ -20,23 +20,96 @@ require 'spec_helper'
 
 describe UsersController do
   before do
-    @user = User.new
-    @user.nickname = 'AdM'
-    @user.email = 'admin@goole.com'
-    @user.password = 'password'
-    @user.password_confirmation = 'password'
-    @user.stakeholder = true
-    @user.save!
+    @user = FactoryGirl.create(:admin)
+    sign_in @user
   end
 
   context "GET /users" do
     before do
-      sign_in @user
       get :index
     end
     it { should respond_with :success }
     it { should render_template :index }
     it { should_not set_the_flash }
   end
+
+  context "GET /users/1" do
+    before do
+      get :show, id: 1
+    end
+    it { should respond_with :success }
+    it { should render_template :show }
+    it { should_not set_the_flash }
+  end
+
+  context "GET /users/1/edit" do
+    before do
+      get :edit, id: 1
+    end
+    it { should respond_with :success }
+    it { should render_template :edit }
+    it { should_not set_the_flash }
+  end
+
+  context "GET /users/new" do
+    before do
+      get :new
+    end
+    it { should respond_with :success }
+    it { should render_template :new }
+    it { should_not set_the_flash }
+  end
+
+  context "POSTS" do
+    def do_request
+      post :create, {"user"=>{"email"=>"Test@test.com", "nickname"=>"Test1", "password"=>"testPass", "password_confirmation"=>"testPass"}}
+    end
+
+    context "create" do
+      context "success" do
+        before {do_request}
+        it {should assign_to :user}
+        it { should respond_with :redirect }
+      end
+
+      context 'failure' do
+        before do
+          User.any_instance.stub(:save).and_return false
+          do_request
+        end
+        it {should render_template :new}
+      end
+    end
+
+    context "update" do
+      def update_request
+        user = FactoryGirl.create(:user)
+        post :update, {"user"=>{"email"=>"Test@testing.com", "nickname"=>"Test1", "password"=>"testPass", "password_confirmation"=>"testPass"}, "id"=>user.id}
+      end
+      context "success" do
+        before {update_request}
+        it {should assign_to :user}
+        it { should respond_with :redirect }
+      end
+
+      context 'failure' do
+        before do
+          User.any_instance.stub(:save).and_return false
+          update_request
+        end
+        it {should render_template :edit}
+      end
+
+      context 'destroy' do
+        before do
+          user = FactoryGirl.create(:user)
+          post :destroy, {id: user.id}
+        end
+        it { should respond_with :redirect }
+      end
+    end
+  end
+
+
 
 end

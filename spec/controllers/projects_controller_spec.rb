@@ -121,28 +121,26 @@ describe ProjectsController do
     end
 
     context "confirm_sprint" do
-      def generate_data
-        project = FactoryGirl.create(:project)
-        feature = FactoryGirl.build(:feature)
-        feature.difficulty = 3
-        feature.project = project
-        feature.save!
-        sprint = Sprint.new
-        sprint.project = project
-        sprint.save!
+      before do
+        @project = FactoryGirl.create(:project)
+        @feature = FactoryGirl.build(:feature)
+        @feature.difficulty = 3
+        @feature.project = @project
+        @feature.save!
+        @sprint = Sprint.new
+        @sprint.project = @project
+        @sprint.save!
       end
       context "put feature in sprint" do
         before do
-          generate_data
-          post :confirm_sprint, {"feature_id"=>feature.id, "sprint_id"=>sprint.id, "id"=>project.id}
+          post :confirm_sprint, {"feature_id"=>@feature.id, "sprint_id"=>@sprint.id, "id"=>@project.id}
         end
         it {should respond_with 406}
       end
 
       context "remove feature form sprint" do
         before do
-          generate_data
-          post :confirm_sprint, {"feature_id"=>feature.id, "sprint_id"=>"0", "id"=>project.id}
+          post :confirm_sprint, {"feature_id"=>@feature.id, "sprint_id"=>"0", "id"=>@project.id}
         end
         it {should respond_with 406}
       end

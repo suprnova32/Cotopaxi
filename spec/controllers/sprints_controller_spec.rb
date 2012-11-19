@@ -20,70 +20,46 @@ require 'spec_helper'
 
 describe SprintsController do
   before do
-    @project = Project.new
-    @project.name = "test"
-    @project.description = "test"
-    @project.save!
+    @project = FactoryGirl.create(:project)
+    @user = FactoryGirl.create(:admin)
+    sign_in @user
   end
 
-  # This should return the minimal set of attributes required to create a valid
-  # Sprint. As you add validations to Sprint, be sure to
-  # update the return value of this method accordingly.
-  def valid_attributes
-    {project: @project}
+  context "GET past_sprints" do
+    before do
+      get :past_sprints, id: 1
+    end
+    it { should respond_with :success }
   end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # SprintsController. Be sure to keep this updated too.
-  def valid_session
-    {user_id: 1}
-  end
-
-
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested sprint" do
-        sprint = Sprint.create! valid_attributes
-        # Assuming there are no other sprints in the database, this
-        # specifies that the Sprint created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Sprint.any_instance.should_receive(:update_attributes).with({'these' => 'params'})
-        put :update, {:project_id => sprint.project.to_param, id: sprint.to_param, :sprint => {'these' => 'params'}}, valid_session
+  context "POSTS" do
+    before do
+      @sprint = Sprint.new
+      @sprint.duration = @project.sprint_duration
+      @sprint.project = @project
+      @sprint.save!
+    end
+    context "update" do
+      def update_request
+        post :update, {"sprint"=>{"state_event"=>"start"}, "project_id"=>@project.id, "id"=>@sprint.id}
       end
 
-      it "assigns the requested sprint as @sprint" do
-        sprint = Sprint.create! valid_attributes
-        put :update, {:id => sprint.project.to_param, :sprint => valid_attributes}, valid_session
-        assigns(:sprint).should eq(sprint)
+      context "success" do
+        before {update_request}
+        it {should assign_to :sprint}
+        it { should respond_with :redirect }
       end
 
-      it "redirects to the sprint" do
-        sprint = Sprint.create! valid_attributes
-        put :update, {:id => sprint.project.to_param, :sprint => valid_attributes}, valid_session
-        response.should redirect_to(sprint)
+      context 'failure' do
+        before do
+          Sprint.any_instance.stub(:save).and_return false
+          update_request
+        end
+        it { should respond_with :redirect }
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the sprint as @sprint" do
-        sprint = Sprint.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Sprint.any_instance.stub(:save).and_return(false)
-        put :update, {:id => sprint.project.to_param, :sprint => {}}, valid_session
-        assigns(:sprint).should eq(sprint)
-      end
-    end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested sprint" do
-      sprint = Sprint.create! valid_attributes
-      expect {
-        delete :destroy, {:id => sprint.project.to_param}, valid_session
-      }.to change(Sprint, :count).by(-1)
-    end
-  end
 
 end
