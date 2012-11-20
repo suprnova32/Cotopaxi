@@ -1,6 +1,20 @@
+# Cotopaxi | Scrum Management Tool
+# Copyright (C) 2012  Patricio Cano
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #require 'bundler/capistrano'
 require "rvm/capistrano"                               # Load RVM's capistrano plugin.
-set :user, "pato"
+set :user, "user"
 set :application, "cotopaxi"
 
 set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
@@ -33,18 +47,3 @@ namespace :deploy do
     run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
   end
 end
-
-# if you want to clean up old releases on each deploy uncomment this:
-# after "deploy:restart", "deploy:cleanup"
-
-# if you're still using the script/reaper helper you will need
-# these http://github.com/rails/irs_process_scripts
-
-# If you are using Passenger mod_rails uncomment this:
-# namespace :deploy do
-#   task :start do ; end
-#   task :stop do ; end
-#   task :restart, :roles => :app, :except => { :no_release => true } do
-#     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
-#   end
-# end

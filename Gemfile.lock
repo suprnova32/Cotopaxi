@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/pivotal/LicenseFinder.git
+  revision: fee831ad6cc4b0aaf67748e0185dee671346dec7
+  specs:
+    license_finder (0.7.0)
+      bundler
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -197,6 +204,7 @@ DEPENDENCIES
   formtastic-bootstrap
   haml-rails
   jquery-rails
+  license_finder!
   mysql2
   pg
   rails (= 3.2.8)
