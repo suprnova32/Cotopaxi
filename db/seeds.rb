@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 admin = User.create [nickname: 'AdM', email: 'admin@localhost.com', password: 'adminPassword', password_confirmation: 'adminPassword', stakeholder: true]
-#scrum = User.create [nickname: 'ScM', email: 'scrum@localhost.com', password: 'scrumPassword', password_confirmation: 'scrumPassword']
-#product = User.create [nickname: 'PrO', email: 'po@localhost.com', password: 'poPassword', password_confirmation: 'poPassword']
-#cust = User.create [nickname: 'CuS', email: 'cust@localhost.com', password: 'custPassword', password_confirmation: 'custPassword']
-#team = User.create [nickname: 'TeM', email: 'team@localhost.com', password: 'teamPassword', password_confirmation: 'teamPassword']
+scrum = User.create [nickname: 'ScM', email: 'scrum@localhost.com', password: 'scrumPassword', password_confirmation: 'scrumPassword']
+product = User.create [nickname: 'PrO', email: 'po@localhost.com', password: 'poPassword', password_confirmation: 'poPassword']
+cust = User.create [nickname: 'CuS', email: 'cust@localhost.com', password: 'custPassword', password_confirmation: 'custPassword']
+team = User.create [nickname: 'TeM', email: 'team@localhost.com', password: 'teamPassword', password_confirmation: 'teamPassword']
