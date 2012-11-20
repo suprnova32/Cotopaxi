@@ -1,12 +1,12 @@
 %ul.nav.nav-tabs#sprintTab
-  %li.active
-    %a{href: "#allFeatures"} All features
   -if @project.sprints.last
-    %li
+    %li.active
       %a{href: "#currentSprint"} Current Sprint
     -if @project.get_unassigned_features.count != 0
       %li
         %a{href: "#noSprint"} Unassigned
+  %li
+    %a{href: "#allFeatures"} All features
   -if @project.sprints.count > 1
     %li
       %a{href: "#pastSprints", id: "pastS"} Past Sprints
