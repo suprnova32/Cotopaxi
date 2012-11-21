@@ -6,6 +6,9 @@ your Scrum workflow.
 It features Twitter's Bootsptrap as a design framework and a lot of custom Javascript
 to make the UI as intuitive as possible.
 
+The name Cotopaxi comes from the highest active volcano in the world located in Ecuador.
+The mountain representing your project, and the application the way to climb it most efficiently.
+
 
 == Getting Started
 
