@@ -33,9 +33,16 @@ test:
   pool: 5
   timeout: 5000
 
+#production:
+#  adapter: postgresql
+#  database: cotopaxi_production
+#  encoding: utf8
+#  pool: 5
+#  timeout: 5000
+
 production:
-  adapter: postgresql
-  database: cotopaxi_production
+  adapter: sqlite3
+  database: db/cotopaxi_production.sqlite3
   encoding: utf8
   pool: 5
   timeout: 5000

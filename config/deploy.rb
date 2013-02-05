@@ -1,49 +1,56 @@
-# Cotopaxi | Scrum Management Tool
-# Copyright (C) 2012  MHM-Systemhaus GmbH
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#require 'bundler/capistrano'
-require "rvm/capistrano"                               # Load RVM's capistrano plugin.
-set :user, "user"
-set :application, "cotopaxi"
+##### Requirement's #####
+require 'bundler/capistrano'
+require 'capistrano/ext/multistage'
 
-set :rvm_ruby_string, ENV['GEM_HOME'].gsub(/.*\//,"")
-set :rvm_type, :user
-set :domain, "cotopaxi.co"
-set :repository,  "#{user}@#{domain}:git/#{application}.git"
-set :deploy_to, "/Users/#{user}/#{application}"
+#### Use the asset-pipeline
+
+#load 'deploy/assets'
+
+##### Stages #####
+set :stages, %w(production staging)
+
+##### Constant variables #####
+set :application, "rails1"
+set :deploy_to,   "/var/www/#{application}"
+set :user, "deploy"
 set :use_sudo, false
 
-set :scm, :git # You can set :scm explicitly or Capistrano will make an intelligent guess based on known version control directory names
-# Or: `accurev`, `bzr`, `cvs`, `darcs`, `git`, `mercurial`, `perforce`, `subversion` or `none`
 
-role :web, domain                          # Your HTTP server, Apache/etc
-role :app, domain                         # This may be the same as your `Web` server
-role :db,  domain, :primary => true # This is where Rails migrations will run
-#role :db,  "your slave db-server here"
+##### Default variables #####
+set :keep_releases, 10
 
-set :rails_env, :production
+##### Repository Settings #####
+set :scm,        :git
+set :repository, "git://github.com/MHM-HR/Cotopaxi.git"
 
+##### Additional Settings #####
+#set :deploy_via, :remote_cache
+set :ssh_options, { :forward_agent => true }
+
+#### Roles #####
+# See Stages
+
+##### Overwritten and changed default capistrano tasks #####
 namespace :deploy do
-  desc "cause Passenger to initiate a restart"
-  task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
-  end
-  task :seed do
-    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+
+  # Restart Application
+  desc "Restart RailsApp"
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    run "touch #{File.join(current_path,'tmp','restart.txt')}"
   end
 
-  task :migrate do
-    run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
+  desc "Additional Symlinks"
+  task :additional_symlink, :roles => :app do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+  end
+
+  desc "Addtional Rake Tasks"
+  task :additional_rake, :roles => :app, :only => {:primary => true} do
+
   end
 end
+  
+##### After and Before Tasks #####
+before "deploy:assets:precompile", "deploy:additional_symlink"
+after "deploy", "deploy:additional_rake"
+after "deploy:restart", "deploy:cleanup"
