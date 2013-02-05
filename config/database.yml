@@ -42,7 +42,7 @@ test:
 
 production:
   adapter: sqlite3
-  database: db/cotopaxi_production.sqlite3
+  database: /var/www/rails1/cotopaxi_production.sqlite3
   encoding: utf8
   pool: 5
   timeout: 5000
