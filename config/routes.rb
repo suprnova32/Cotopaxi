@@ -30,10 +30,6 @@ Cotopaxi::Application.routes.draw do
   post 'projects/:id/confirm_sprint' => 'projects#confirm_sprint'
   get 'projects/:id/past_sprints' => 'sprints#past_sprints'
 
-  get '/mu-5568ed11-0ee94393-6a0265e4-df532cb5' do
-    '42'
-  end
-
   root to: "users#show"
 
 end
