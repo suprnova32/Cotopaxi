@@ -48,6 +48,15 @@ namespace :deploy do
   task :additional_rake, :roles => :app, :only => {:primary => true} do
 
   end
+
+  desc "Seed database"
+  task :seed do
+    run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
+  task :migrate do
+    run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
+  end
 end
   
 ##### After and Before Tasks #####
