@@ -23,6 +23,7 @@ gem 'license_finder', git: "https://github.com/pivotal/LicenseFinder.git"
 group :production do
   gem 'mysql2'
   gem 'pg'
+  gem 'sqlite3'
 end
 
 
