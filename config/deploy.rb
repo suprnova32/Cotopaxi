@@ -49,17 +49,24 @@ namespace :deploy do
 
   end
 
+  task :precompile do
+    run "cd #{current_path}; bundle exec rake assets:precompile RAILS_ENV=#{rails_env}"
+  end
+
   desc "Seed database"
   task :seed do
     run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
   end
 
-  task :migrate do
+  task :migrate, :role => :db do
     run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
   end
 end
+
+
+after "deploy:finalize_update", "deploy:additional_symlink"
   
 ##### After and Before Tasks #####
-before "deploy:assets:precompile", "deploy:additional_symlink"
+#before "deploy:assets:precompile", "deploy:additional_symlink"
 after "deploy", "deploy:additional_rake"
 after "deploy:restart", "deploy:cleanup"
