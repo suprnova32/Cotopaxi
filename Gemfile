@@ -14,7 +14,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails'
+gem 'airbrake'
+gem 'newrelic_rpm'
 gem 'license_finder', git: "https://github.com/pivotal/LicenseFinder.git"
 
 # Bundle edge Rails instead:
@@ -29,8 +31,8 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
@@ -44,6 +46,8 @@ group :development, :test do
   gem 'simplecov'
   gem 'capybara'
   gem 'sqlite3'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 gem 'jquery-rails'
