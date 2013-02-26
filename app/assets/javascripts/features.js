@@ -158,6 +158,6 @@ $(document).ready(function(){
             });
         }
     });
-    $("#feature_table tr:even').addClass('tDnD_whileDrag')");
+    $("#feature_table").find("tr:even').addClass('tDnD_whileDrag')");
 });
 
