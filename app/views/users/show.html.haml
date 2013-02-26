@@ -20,7 +20,7 @@
       %th Name
       %th Description
       %th State
-    -@user.projects.each do |project|
+    -@user.projects.uniq.each do |project|
       %tr{class: project.set_title_background}
         %td= project.name
         %td= project.description
