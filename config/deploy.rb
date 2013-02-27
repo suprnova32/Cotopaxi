@@ -10,7 +10,7 @@ require 'capistrano/ext/multistage'
 set :stages, %w(production staging)
 
 ##### Constant variables #####
-set :application, "rails1"
+set :application, "rails2"
 set :deploy_to,   "/var/www/#{application}"
 set :user, "deploy"
 set :use_sudo, false
@@ -54,11 +54,11 @@ namespace :deploy do
   end
 
   desc "Seed database"
-  task :seed do
+  task :seed, :role => :db, :only => {:primary => true} do
     run "cd #{current_path}; rake db:seed RAILS_ENV=#{rails_env}"
   end
 
-  task :migrate, :role => :db do
+  task :migrate, :role => :db, :only => {:primary => true} do
     run "cd #{current_path}; rake db:migrate RAILS_ENV=#{rails_env}"
   end
 end
