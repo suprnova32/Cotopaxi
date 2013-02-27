@@ -12,7 +12,7 @@
 -## GNU General Public License for more details.
 -## You should have received a copy of the GNU General Public License
 -## along with this program.  If not, see <http://www.gnu.org/licenses/>.
-.tab-pane.active#allFeatures
+.tab-pane#allFeatures{class: unless @project.sprints.last; 'active' end}
   %table{class: "table table-hover #{if can? :prioritize_feature, @project; @project.drag_available else "no_drag" end}", name: @project.id}
     %thead
       %tr
