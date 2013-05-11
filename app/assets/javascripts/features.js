@@ -37,7 +37,7 @@ $(document).ready(function(){
             $('#assignChz').attr("class", "chzn-select");
             $('.chzn-select').chosen()});
     });
-    $('#sprintTab a').click(function (e) {
+    $('#sprintTab').find('a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
     });

@@ -1,5 +1,7 @@
 == Welcome to Cotopaxi
 
+{<img src="https://travis-ci.org/MHM-HR/Cotopaxi.png?branch=master" alt="Build Status" />}[https://travis-ci.org/MHM-HR/Cotopaxi]
+
 Cotopaxi is a web-application based on Rails specially made to help you manage
 your Scrum workflow.
 
