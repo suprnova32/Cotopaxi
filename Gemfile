@@ -57,6 +57,7 @@ gem 'formtastic-bootstrap'
 gem 'haml-rails'
 gem 'state_machine'
 gem 'cancan'
+gem 'coveralls', require: false
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

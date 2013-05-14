@@ -14,6 +14,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'simplecov'
+require 'coveralls'
+Coveralls.wear!
 SimpleCov.start 'rails'
 #require 'selenium-webdriver'
 ENV["RAILS_ENV"] ||= 'test'

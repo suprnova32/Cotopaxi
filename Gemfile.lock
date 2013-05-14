@@ -73,6 +73,13 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.5.0)
+    colorize (0.5.8)
+    coveralls (0.6.7)
+      colorize
+      multi_json (~> 1.3)
+      rest-client
+      simplecov (>= 0.7)
+      thor
     debug_inspector (0.0.2)
     devise (2.2.3)
       bcrypt-ruby (~> 3.0)
@@ -156,6 +163,8 @@ GEM
     rake (10.0.3)
     rdoc (3.12.2)
       json (~> 1.4)
+    rest-client (1.6.7)
+      mime-types (>= 1.16)
     rspec-core (2.13.0)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -220,6 +229,7 @@ DEPENDENCIES
   capistrano
   capybara
   coffee-rails
+  coveralls
   devise
   factory_girl_rails
   formtastic-bootstrap
