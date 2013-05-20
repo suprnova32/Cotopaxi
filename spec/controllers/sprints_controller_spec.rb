@@ -60,7 +60,10 @@ describe SprintsController do
 
       context "success" do
         before {update_request}
-        it {should assign_to :sprint}
+        #it {should assign_to :sprint}
+        it 'should assign to sprint' do
+          assigns[:sprint].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 

@@ -75,7 +75,10 @@ describe ProjectsController do
     context "create" do
       context "success" do
         before {do_request}
-        it {should assign_to :project}
+        #it {should assign_to :project}
+        it 'should assign to project' do
+          assigns[:project].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 
@@ -95,7 +98,10 @@ describe ProjectsController do
       end
       context "success" do
         before {update_request}
-        it {should assign_to :project}
+        #it {should assign_to :project}
+        it 'should assign to project' do
+          assigns[:project].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 

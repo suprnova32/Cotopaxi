@@ -82,7 +82,10 @@ describe UsersController do
     context "create" do
       context "success" do
         before {do_request}
-        it {should assign_to :user}
+        #it {should assign_to :user}
+        it 'should assign to user' do
+          assigns[:user].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 
@@ -102,7 +105,10 @@ describe UsersController do
       end
       context "success" do
         before {update_request}
-        it {should assign_to :user}
+        #it {should assign_to :user}
+        it 'should assign to user' do
+          assigns[:user].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 
