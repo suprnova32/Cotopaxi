@@ -17,7 +17,6 @@ source 'https://rubygems.org'
 gem 'rails'
 gem 'airbrake'
 gem 'newrelic_rpm'
-gem 'license_finder', git: "https://github.com/pivotal/LicenseFinder.git"
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -45,7 +44,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'capybara'
-  #gem 'sqlite3'
+  gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
