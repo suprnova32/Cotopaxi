@@ -45,7 +45,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'capybara'
-  gem 'sqlite3'
+  #gem 'sqlite3'
   gem 'better_errors'
   gem 'binding_of_caller'
 end
