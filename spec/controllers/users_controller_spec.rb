@@ -44,7 +44,6 @@ describe UsersController do
     end
     it { should respond_with :success }
     it { should render_template :index }
-    it { should_not set_the_flash }
   end
 
   context "GET /users/1" do
@@ -53,7 +52,6 @@ describe UsersController do
     end
     it { should respond_with :success }
     it { should render_template :show }
-    it { should_not set_the_flash }
   end
 
   context "GET /users/1/edit" do
@@ -62,7 +60,6 @@ describe UsersController do
     end
     it { should respond_with :success }
     it { should render_template :edit }
-    it { should_not set_the_flash }
   end
 
   context "GET /users/new" do
@@ -71,7 +68,6 @@ describe UsersController do
     end
     it { should respond_with :success }
     it { should render_template :new }
-    it { should_not set_the_flash }
   end
 
   context "POSTS" do
@@ -86,7 +82,7 @@ describe UsersController do
         it 'should assign to user' do
           assigns[:user].should_not be_nil
         end
-        it { should respond_with :redirect }
+        it { should respond_with :success }
       end
 
       context 'failure' do

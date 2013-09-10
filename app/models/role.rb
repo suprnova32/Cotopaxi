@@ -13,7 +13,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Role < ActiveRecord::Base
-  attr_accessible :role, :user_id, :project_id
   belongs_to :user
   belongs_to :project
 

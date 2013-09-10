@@ -43,7 +43,12 @@ class SprintsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @sprint }
     end
+  end
 
+  private
+  # Only allow a trusted parameter "white list" through.
+  def sprint_params
+    params.require(:sprint).permit(:duration, :project_id, :state, :state_event, :project)
   end
 
 end

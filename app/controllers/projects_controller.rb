@@ -66,7 +66,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     authorize! :create, Project
-    @project = Project.new(params[:project])
+    @project = Project.new(project_params)
     @project.roles << Role.new(role: :product_owner, project_id: @project.id)
     @project.roles << Role.new(role: :scrum_master, project_id: @project.id)
     @project.stakeholder_ids = current_user.id
@@ -89,7 +89,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     respond_to do |format|
-      if @project.update_attributes(params[:project])
+      if @project.update_attributes(project_params)
         format.html { redirect_to @project, flash: {success: 'Project was successfully updated.'}}
         format.json { head :no_content }
       else
@@ -125,6 +125,7 @@ class ProjectsController < ApplicationController
     end
     respond_to do |format|
       format.json { render json: @order }
+      format.html
     end
 
   end
@@ -133,7 +134,7 @@ class ProjectsController < ApplicationController
     new_params = params[:role]
     authorize! :assign_roles, Project
     @project = Project.find(params[:id])
-    @project.assign_roles(new_params)
+    @project.assign_roles(role_params(new_params))
     respond_to do |format|
       format.html { redirect_to project_url(@project), flash: {success: 'Project was successfully updated.'} }
       format.json { render json: @project }
@@ -177,10 +178,22 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @feature.save
         format.json {render json: @sprint}
+        format.html
       else
         format.json {render json: @sprint.errors, status: :unprocessable_entity}
+        format.html
       end
 
     end
+  end
+
+  private
+  # Only allow a trusted parameter "white list" through.
+  def project_params
+    params.require(:project).permit(:description, :name, :state, :state_event, :sprint_duration, customer_ids: [], stakeholder_ids: [], team_member_ids: [] )
+  end
+
+  def role_params(par)
+    par.permit(:project_id, :role, :id, :user_id)
   end
 end
