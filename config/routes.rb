@@ -23,11 +23,12 @@ Cotopaxi::Application.routes.draw do
     resources :sprints
   end
 
-  post 'projects/:id/sort_features' => 'projects#sort_features'
+  post 'projects/:id/sort_features' => 'projects#sort_features', format: :json
   post 'projects/:id/assign_roles' => 'projects#assign_roles'
   put  'projects/:id/assign_roles' => 'projects#assign_roles'
+  patch 'projects/:id/assign_roles' => 'projects#assign_roles'
   get 'projects/:id/plan_sprint' => 'projects#plan_sprint'
-  post 'projects/:id/confirm_sprint' => 'projects#confirm_sprint'
+  post 'projects/:id/confirm_sprint' => 'projects#confirm_sprint', format: :json
   get 'projects/:id/past_sprints' => 'sprints#past_sprints'
 
   root to: "users#show"

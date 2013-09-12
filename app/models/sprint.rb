@@ -15,7 +15,6 @@
 class Sprint < ActiveRecord::Base
   has_many :features
   belongs_to :project
-  attr_accessible :duration, :project_id, :state, :state_event, :project
   validates_presence_of :project
 
   state_machine :state, initial: :created do

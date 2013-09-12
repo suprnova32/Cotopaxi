@@ -29,7 +29,6 @@ describe ProjectsController do
 
     it { should respond_with :success }
     it { should render_template :show }
-    it { should_not set_the_flash }
 
     context "show edit projects form" do
       before do
@@ -39,7 +38,6 @@ describe ProjectsController do
       it {should }
       it { should respond_with :success }
       it {should render_template :edit}
-      it { should_not set_the_flash }
     end
 
     context "show projects' index" do
@@ -50,7 +48,6 @@ describe ProjectsController do
 
       it { should respond_with :success }
       it { should render_template :index }
-      it { should_not set_the_flash }
     end
   end
 
@@ -60,7 +57,6 @@ describe ProjectsController do
       sign_in @user
       get :new
     end
-    it { should set_the_flash }
     it { should redirect_to projects_url}
   end
 
@@ -75,7 +71,10 @@ describe ProjectsController do
     context "create" do
       context "success" do
         before {do_request}
-        it {should assign_to :project}
+        #it {should assign_to :project}
+        it 'should assign to project' do
+          assigns[:project].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 
@@ -95,7 +94,10 @@ describe ProjectsController do
       end
       context "success" do
         before {update_request}
-        it {should assign_to :project}
+        #it {should assign_to :project}
+        it 'should assign to project' do
+          assigns[:project].should_not be_nil
+        end
         it { should respond_with :redirect }
       end
 
@@ -121,7 +123,7 @@ describe ProjectsController do
         end
         post :sort_features, {"order"=>@features, "id"=>project.id}
       end
-      it {should respond_with 406}
+      it {should respond_with 200}
     end
 
     context "assign_roles" do
@@ -149,14 +151,14 @@ describe ProjectsController do
         before do
           post :confirm_sprint, {"feature_id"=>@feature.id, "sprint_id"=>@sprint.id, "id"=>@project.id}
         end
-        it {should respond_with 406}
+        it {should respond_with 200}
       end
 
       context "remove feature form sprint" do
         before do
           post :confirm_sprint, {"feature_id"=>@feature.id, "sprint_id"=>"0", "id"=>@project.id}
         end
-        it {should respond_with 406}
+        it {should respond_with 200}
       end
     end
   end

@@ -20,6 +20,14 @@ function showLoaders(){
     $('#loader').fadeIn();
 }
 
+function xinspect(obj){
+    var str = "";
+    for(var k in obj)
+        if (obj.hasOwnProperty(k)) //omit this test if you want to see built-in properties
+            str += k + " = " + obj[k] + "\n";
+    alert(str);
+}
+
 $(document).ready(function(){
     $('#assignChz').attr("class", "chzn-select");
     $('#modalShow').click(function(){
