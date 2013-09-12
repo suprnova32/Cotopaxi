@@ -13,11 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Feature < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :difficulty, :priority, :state_event
   belongs_to :project
   belongs_to :sprint
   validates_presence_of :project, :name, :description
-  scope :by_priority, order('priority asc')
+  scope :by_priority, -> { order('priority asc') }
 
   before_create :set_priority
 
@@ -81,7 +80,4 @@ class Feature < ActiveRecord::Base
       self.project.save!
     end
   end
-
-
-
 end

@@ -13,26 +13,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 class Project < ActiveRecord::Base
-  attr_accessible :description, :name, :state, :state_event, :customer_ids, :stakeholder_ids, :team_member_ids, :sprint_duration
   has_many :features, dependent: :destroy
   has_many :sprints, dependent: :destroy
   validates_presence_of :description, :name
   has_many :roles, dependent: :destroy
   has_many :users, through: :roles
 
-  has_many :team_member_roles, class_name: Role.name, conditions: {:role => "team_member"}
+  has_many :team_member_roles, -> { where role: 'team_member' }, class_name: Role.name
   has_many :team_members, through: :team_member_roles, source: :user
 
-  has_many :stakeholder_roles, class_name: Role.name, conditions: {:role => "stakeholder"}
+  has_many :stakeholder_roles, -> {where role: 'stakeholder' }, class_name: Role.name
   has_many :stakeholders, through: :stakeholder_roles, source: :user
 
-  has_many :customer_roles, class_name: Role.name, conditions: {:role => "customer"}
+  has_many :customer_roles, -> { where role: 'customer' }, class_name: Role.name
   has_many :customers, through: :customer_roles, source: :user
 
-  has_one :scrum_master_role, class_name: Role.name, conditions: {role: "scrum_master"}
+  has_one :scrum_master_role, -> {where role: 'scrum_master' }, class_name: Role.name
   has_one :scrum_master, through: :scrum_master_role, source: :user
 
-  has_one :product_owner_role, class_name: Role.name, conditions: {role: "product_owner"}
+  has_one :product_owner_role, -> { where role: 'product_owner' }, class_name: Role.name
   has_one :product_owner, through: :product_owner_role, source: :user
 
 

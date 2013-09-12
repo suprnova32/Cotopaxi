@@ -1,7 +1,7 @@
 == Welcome to Cotopaxi
 
-{<img src="https://travis-ci.org/MHM-HR/Cotopaxi.png?branch=master" alt="Build Status" />}[https://travis-ci.org/MHM-HR/Cotopaxi]
-{<img src="https://coveralls.io/repos/MHM-HR/Cotopaxi/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/MHM-HR/Cotopaxi]
+{<img src="https://travis-ci.org/supernova32/Cotopaxi.png?branch=master" alt="Build Status" />}[https://travis-ci.org/supernova32/Cotopaxi]
+{<img src="https://coveralls.io/repos/supernova32/Cotopaxi/badge.png?branch=master" alt="Coverage Status" />}[https://coveralls.io/r/supernova32/Cotopaxi?branch=master]
 
 Cotopaxi is a web-application based on Rails specially made to help you manage
 your Scrum workflow.

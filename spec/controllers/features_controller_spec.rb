@@ -32,7 +32,6 @@ describe FeaturesController do
     end
     it { should respond_with :success }
     it { should render_template :new }
-    it { should_not set_the_flash }
 
     context "display features index" do
       before do
@@ -40,7 +39,6 @@ describe FeaturesController do
       end
       it { should respond_with :success }
       it { should render_template :index }
-      it { should_not set_the_flash }
     end
 
     context "display edit feature" do
@@ -49,7 +47,6 @@ describe FeaturesController do
       end
       it { should respond_with :success }
       it { should render_template :edit }
-      it { should_not set_the_flash }
     end
 
     context "POST" do
@@ -60,7 +57,10 @@ describe FeaturesController do
       context "create" do
         context "success" do
           before {do_request}
-          it {should assign_to :feature}
+          #it {should assign_to :feature}
+          it 'should assign to feature' do
+            assigns[:feature].should_not be_nil
+          end
           it { should respond_with :redirect }
         end
 
@@ -84,7 +84,10 @@ describe FeaturesController do
         end
         context "success" do
           before {update_request}
-          it {should assign_to :feature}
+          #it {should assign_to :feature}
+          it 'should assign to feature' do
+            assigns[:feature].should_not be_nil
+          end
           it { should respond_with :redirect }
         end
 

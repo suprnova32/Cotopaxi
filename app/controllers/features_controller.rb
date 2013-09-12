@@ -63,7 +63,7 @@ class FeaturesController < ApplicationController
   # POST /features
   # POST /features.json
   def create
-    @feature = Feature.new(params[:feature])
+    @feature = Feature.new(feature_params)
     @project = Project.find(params[:project_id])
     @feature.project = @project
 
@@ -84,7 +84,7 @@ class FeaturesController < ApplicationController
     @feature = Feature.find(params[:id])
 
     respond_to do |format|
-      if @feature.update_attributes(params[:feature])
+      if @feature.update_attributes(feature_params)
         format.html { redirect_to project_url(@feature.project), flash: {success: 'Feature was successfully updated.'}}
         format.json { head :no_content }
       else
@@ -105,5 +105,11 @@ class FeaturesController < ApplicationController
       format.html { redirect_to project_url(project), flash: {success: 'Feature was successfully deleted.'} }
       format.json { head :no_content }
     end
+  end
+
+  private
+  # Only allow a trusted parameter "white list" through.
+  def feature_params
+    params.require(:feature).permit(:description, :name, :state, :difficulty, :priority, :state_event, :project_id, :sprint_id)
   end
 end
